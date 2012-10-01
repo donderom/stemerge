@@ -1,0 +1,11 @@
+{application, stemerge,
+ [
+  {description, "A collection of stemmers"},
+  {vsn, "0.1.0"},
+  {registered, []},
+  {applications, [
+                  kernel,
+                  stdlib
+                 ]},
+  {env, []}
+ ]}.
