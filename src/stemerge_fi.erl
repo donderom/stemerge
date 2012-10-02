@@ -54,10 +54,6 @@
         ((not ?is_a_vowel(Char1))
          and (?is_a_vowel(Char2)))).
 
--define(is_a_double_consonant(Char1, Char2),
-        ((Char1 =:= Char2)
-         and (not ?is_a_vowel(Char1)))).
-
 %%-----------------------------------------------------------------------------
 %% Types
 %%-----------------------------------------------------------------------------
@@ -140,7 +136,7 @@ step2("neeni" ++ Tail, R1Pos) when length(Tail) >= R1Pos -> "eni" ++ Tail;
 step2(Word, _)                                           -> Word.
 
 %% step 3
--spec step3(string(), r1pos()) -> string().
+-spec step3(string(), r1pos()) -> {boolean(), string()}.
 step3([$n, Char, $h, Char2 | Tail] = Word, R1Pos) when length(Tail) + 1 >= R1Pos,
                                                        (Char =/= $u) ->
     case ((Char =:= Char2) and (?is_a_V(Char))) of
@@ -285,20 +281,20 @@ step6d(Word, _) ->
 
 %% step6e
 -spec step6e(string()) -> string().
-step6e([Char1, Char2 | Tail]) when ?is_a_double_consonant(Char1, Char2) ->
-    [Char1 | Tail];
-step6e([Char1, Char2, Char3 | Tail]) when ?is_a_vowel(Char1),
-                                          ?is_a_double_consonant(Char2, Char3) ->
-    [Char1, Char3 | Tail];
-step6e([Char1, Char2, Char3, Char4 | Tail]) when ?is_a_vowel(Char1),
+step6e([Char, Char | Tail]) when not ?is_a_vowel(Char) ->
+    [Char | Tail];
+step6e([Char1, Char2, Char2 | Tail]) when ?is_a_vowel(Char1),
+                                          not ?is_a_vowel(Char2) ->
+    [Char1, Char2 | Tail];
+step6e([Char1, Char2, Char3, Char3 | Tail]) when ?is_a_vowel(Char1),
                                                  ?is_a_vowel(Char2),
-                                                 ?is_a_double_consonant(Char3, Char4) ->
-    [Char1, Char2, Char4 | Tail];
-step6e([Char1, Char2, Char3, Char4, Char5 | Tail]) when ?is_a_vowel(Char1),
+                                                 not ?is_a_vowel(Char3) ->
+    [Char1, Char2, Char3 | Tail];
+step6e([Char1, Char2, Char3, Char4, Char4 | Tail]) when ?is_a_vowel(Char1),
                                                         ?is_a_vowel(Char2),
                                                         ?is_a_vowel(Char3),
-                                                        ?is_a_double_consonant(Char4, Char5) ->
-    [Char1, Char2, Char3, Char5 | Tail];
+                                                        not ?is_a_vowel(Char4) ->
+    [Char1, Char2, Char3, Char4 | Tail];
 step6e(Word) ->
     Word.
 
