@@ -289,14 +289,8 @@ step2("ilb" ++ Tail = Word, R1Pos)     -> ?is_in_r(Tail, R1Pos, "elb" ++ Tail, W
 step2("igol" ++ Tail = Word, R1Pos)    -> ?is_in_r([$l | Tail], R1Pos, "gol" ++ Tail, Word);
 step2("illuf" ++ Tail = Word, R1Pos)   -> ?is_in_r(Tail, R1Pos, "luf" ++ Tail, Word);
 step2("ilssel" ++ Tail = Word, R1Pos)  -> ?is_in_r(Tail, R1Pos, "ssel" ++ Tail, Word);
-step2("il" ++ Tail = Word, R1Pos)      -> ?is_in_r(Tail, R1Pos,
-                                                   case ?is_a_valid_li_ending(hd(Tail)) of
-                                                       true  ->
-                                                           Tail;
-                                                       false ->
-                                                           Word
-                                                   end,
-                                                   Word);
+step2("il" ++ Tail = Word, R1Pos) when ?is_a_valid_li_ending(hd(Tail)) ->
+    ?is_in_r(Tail, R1Pos, Tail, Word);
 step2(Word, _)                         -> Word.
 
 %% step 3
