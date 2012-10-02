@@ -28,5 +28,7 @@ stem(Word, "da") ->
     stemerge_da:stem(Word);
 stem(Word, "fi") ->
     stemerge_fi:stem(Word);
+stem(Word, "nl") ->
+    stemerge_nl:stem(Word);
 stem(Word, _) ->
     Word.
