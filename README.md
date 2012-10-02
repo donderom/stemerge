@@ -9,6 +9,7 @@ At the moment the following languages are supported:
 * Finnish
 
 Germanic:
+* German
 * Dutch
 
 Scandinavian:
