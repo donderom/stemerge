@@ -6,6 +6,7 @@ Stemerge is a collection of [stemmers](http://en.wikipedia.org/wiki/Stemming) in
 
 At the moment the following languages are supported:
 * English (Porter2 stemming algorithm)
+* Finnish
 
 Germanic:
 * Dutch
@@ -14,8 +15,6 @@ Scandinavian:
 * Swedish
 * Norwegian
 * Danish
-
-* Finnish
 
 ## Usage
 
