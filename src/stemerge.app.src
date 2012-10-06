@@ -1,7 +1,7 @@
 {application, stemerge,
  [
   {description, "A collection of stemmers"},
-  {vsn, "0.1.0"},
+  {vsn, "0.3.1"},
   {registered, []},
   {applications, [
                   kernel,

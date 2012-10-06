@@ -8,6 +8,9 @@ At the moment the following languages are supported:
 * English (Porter2 stemming algorithm)
 * Finnish
 
+Romance:
+* French
+
 Germanic:
 * German
 * Dutch

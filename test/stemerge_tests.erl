@@ -41,6 +41,11 @@ stemerge_de_test() ->
     {Words, Stems} = vocs("de"),
     ?assertEqual(stem_all(fun stemerge_de:stem/1, Words, Stems), []).
 
+%% french
+stemerge_fr_test() ->
+    {Words, Stems} = vocs("fr"),
+    ?assertEqual(stem_all(fun stemerge_fr:stem/1, Words, Stems), []).
+
 %%-----------------------------------------------------------------------------
 %% Helpers
 %%-----------------------------------------------------------------------------
