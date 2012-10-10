@@ -34,5 +34,7 @@ stem(Word, "de") ->
     stemerge_de:stem(Word);
 stem(Word, "fr") ->
     stemerge_fr:stem(Word);
+stem(Word, "es") ->
+    stemerge_es:stem(Word);
 stem(Word, _) ->
     Word.

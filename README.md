@@ -10,6 +10,7 @@ At the moment the following languages are supported:
 
 Romance:
 * French
+* Spanish
 
 Germanic:
 * German
