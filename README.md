@@ -12,6 +12,7 @@ Romance:
 * French
 * Spanish
 * Portuguese
+* Italian
 
 Germanic:
 * German
