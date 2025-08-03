@@ -1,0 +1,25 @@
+name: CI
+
+on: [pull_request, push]
+
+jobs:
+  test:
+    name: Test on Erlang ${{ matrix.erlang }}
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        erlang: [26, 27, 28]
+
+    container:
+      image: erlang:${{ matrix.erlang }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Compile
+        run: rebar3 compile
+
+      - name: Test
+        run: rebar3 eunit
