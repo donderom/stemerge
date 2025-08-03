@@ -83,7 +83,7 @@ vocs(Lang) ->
 
 -spec voc_to_list(string()) -> [string()].
 voc_to_list(VocFileName) ->
-    VocFile = filename:join([filename:absname(".."), "test", VocFileName]),
+    VocFile = filename:join(["test", VocFileName]),
     {ok, Voc} = file:read_file(VocFile),
     string:tokens(binary_to_list(Voc), "\n").
 
