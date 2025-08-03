@@ -353,7 +353,7 @@ r_pos([_ | Tail], StartPos) ->
 r_pos([], StartPos) ->
     {[], StartPos}.
 
--spec rv_pos(string()) -> string().
+-spec rv_pos(string()) -> non_neg_integer().
 rv_pos("par" ++ _) ->
     3;
 rv_pos("col" ++ _) ->

@@ -358,7 +358,7 @@ r_pos([_ | Tail], StartPos) ->
 r_pos([], StartPos) ->
     {[], StartPos}.
 
--spec rv_pos(string()) -> string().
+-spec rv_pos(string()) -> non_neg_integer().
 rv_pos([_, Char1 | Tail]) when not ?is_a_vowel(Char1) ->
     rv_pos(vowel, Tail, 2);
 rv_pos([Char1, Char2 | Tail]) when ?is_a_vowel(Char1),

@@ -309,7 +309,7 @@ step3a([$ò | Tail], RVPos) when length(Tail) >= RVPos -> after_step3a(Tail, RVP
 step3a(Word, _)                                       -> Word.
 
 %% after step 3a
--spec after_step3a(string(), rvpos) -> string().
+-spec after_step3a(string(), rvpos()) -> string().
 after_step3a([$i | Tail], RVPos) when length(Tail) >= RVPos -> Tail;
 after_step3a(Word, _)                                       -> Word.
 
@@ -389,7 +389,7 @@ r_pos([_ | Tail], StartPos) ->
 r_pos([], StartPos) ->
     {[], StartPos}.
 
--spec rv_pos(string()) -> string().
+-spec rv_pos(string()) -> non_neg_integer().
 rv_pos([_, Char1 | Tail]) when not ?is_a_vowel(Char1) ->
     rv_pos(vowel, Tail, 2);
 rv_pos([Char1, Char2 | Tail]) when ?is_a_vowel(Char1),
