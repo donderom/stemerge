@@ -24,17 +24,17 @@
          or (Char =:= $o)
          or (Char =:= $u)
          or (Char =:= $y)
-         or (Char =:= $â)
-         or (Char =:= $à)
-         or (Char =:= $ë)
-         or (Char =:= $é)
-         or (Char =:= $ê)
-         or (Char =:= $è)
-         or (Char =:= $ï)
-         or (Char =:= $î)
-         or (Char =:= $ô)
-         or (Char =:= $û)
-         or (Char =:= $ù))).
+         or (Char =:= $Ã¢)
+         or (Char =:= $Ã )
+         or (Char =:= $Ã«)
+         or (Char =:= $Ã©)
+         or (Char =:= $Ãª)
+         or (Char =:= $Ã¨)
+         or (Char =:= $Ã¯)
+         or (Char =:= $Ã®)
+         or (Char =:= $Ã´)
+         or (Char =:= $Ã»)
+         or (Char =:= $Ã¹))).
 
 %%-----------------------------------------------------------------------------
 %% Types
@@ -119,8 +119,8 @@ step1("stneme" ++ Tail, R1Pos, R2Pos, RVPos) when length(Tail) >= RVPos ->
 step1("tneme" ++ Tail, R1Pos, R2Pos, RVPos) when length(Tail) >= RVPos  ->
     step3(step1b(Tail, R1Pos, R2Pos, RVPos));
 
-step1("séti" ++ Tail, _, R2Pos, _) when length(Tail) >= R2Pos -> step3(step1d(Tail, R2Pos));
-step1("éti" ++ Tail, _, R2Pos, _) when length(Tail) >= R2Pos  -> step3(step1d(Tail, R2Pos));
+step1("sÃ©ti" ++ Tail, _, R2Pos, _) when length(Tail) >= R2Pos -> step3(step1d(Tail, R2Pos));
+step1("Ã©ti" ++ Tail, _, R2Pos, _) when length(Tail) >= R2Pos  -> step3(step1d(Tail, R2Pos));
 step1("sevi" ++ Tail, _, R2Pos, _) when length(Tail) >= R2Pos -> step3(step1e(Tail, R2Pos));
 step1("sfi" ++ Tail, _, R2Pos, _) when length(Tail) >= R2Pos  -> step3(step1e(Tail, R2Pos));
 step1("evi" ++ Tail, _, R2Pos, _) when length(Tail) >= R2Pos  -> step3(step1e(Tail, R2Pos));
@@ -156,8 +156,8 @@ step1b("sue" ++ Tail, _, R2Pos, _) when length(Tail) >= R2Pos -> Tail;
 step1b("sue" ++ Tail, R1Pos, _, _) when length(Tail) >= R1Pos -> "xue" ++ Tail;
 step1b("lba" ++ Tail, _, R2Pos, _) when length(Tail) >= R2Pos -> Tail;
 step1b("Uqi" ++ Tail, _, R2Pos, _) when length(Tail) >= R2Pos -> Tail;
-step1b("rèi" ++ Tail, _, _, RVPos) when length(Tail) >= RVPos -> [$i |Tail];
-step1b("rèI" ++ Tail, _, _, RVPos) when length(Tail) >= RVPos -> [$i |Tail];
+step1b("rÃ¨i" ++ Tail, _, _, RVPos) when length(Tail) >= RVPos -> [$i |Tail];
+step1b("rÃ¨I" ++ Tail, _, _, RVPos) when length(Tail) >= RVPos -> [$i |Tail];
 step1b(Word, _, _, _)                                         -> Word.
 
 %% step 1c
@@ -204,15 +204,15 @@ step2a("snori" ++ T = W, R2, RV) when length(T) >= RV    -> step2a(T, R2, RV, W)
 step2a("tnori" ++ T = W, R2, RV) when length(T) >= RV    -> step2a(T, R2, RV, W);
 step2a("sessi" ++ T = W, R2, RV) when length(T) >= RV    -> step2a(T, R2, RV, W);
 step2a("zessi" ++ T = W, R2, RV) when length(T) >= RV    -> step2a(T, R2, RV, W);
-step2a("semî" ++ T = W, R2, RV) when length(T) >= RV     -> step2a(T, R2, RV, W);
-step2a("setî" ++ T = W, R2, RV) when length(T) >= RV     -> step2a(T, R2, RV, W);
+step2a("semÃ®" ++ T = W, R2, RV) when length(T) >= RV     -> step2a(T, R2, RV, W);
+step2a("setÃ®" ++ T = W, R2, RV) when length(T) >= RV     -> step2a(T, R2, RV, W);
 step2a("iari" ++ T = W, R2, RV) when length(T) >= RV     -> step2a(T, R2, RV, W);
 step2a("sari" ++ T = W, R2, RV) when length(T) >= RV     -> step2a(T, R2, RV, W);
 step2a("zeri" ++ T = W, R2, RV) when length(T) >= RV     -> step2a(T, R2, RV, W);
 step2a("essi" ++ T = W, R2, RV) when length(T) >= RV     -> step2a(T, R2, RV, W);
 step2a("sei" ++ T = W, R2, RV) when length(T) >= RV      -> step2a(T, R2, RV, W);
 step2a("ari" ++ T = W, R2, RV) when length(T) >= RV      -> step2a(T, R2, RV, W);
-step2a("tî" ++ T = W, R2, RV) when length(T) >= RV       -> step2a(T, R2, RV, W);
+step2a("tÃ®" ++ T = W, R2, RV) when length(T) >= RV       -> step2a(T, R2, RV, W);
 step2a([$e, $i, C | T] = W, R2, RV) when length(T) >= RV -> step2a([C | T], R2, RV, W);
 step2a([$r, $i, C | T] = W, R2, RV) when length(T) >= RV -> step2a([C | T], R2, RV, W);
 step2a([$s, $i, C | T] = W, R2, RV) when length(T) >= RV -> step2a([C | T], R2, RV, W);
@@ -233,7 +233,7 @@ step2b("snoissa" ++ T, _, RVPos) when length(T) >= RVPos  -> step3(step2b(T, RVP
 step2b("snoire" ++ T, _, RVPos) when length(T) >= RVPos   -> step3(T);
 step2b("tnessa" ++ T, _, RVPos) when length(T) >= RVPos   -> step3(step2b(T, RVPos));
 step2b("zeissa" ++ T, _, RVPos) when length(T) >= RVPos   -> step3(step2b(T, RVPos));
-step2b("tnerè" ++ T, _, RVPos) when length(T) >= RVPos    -> step3(T);
+step2b("tnerÃ¨" ++ T, _, RVPos) when length(T) >= RVPos    -> step3(T);
 step2b("siare" ++ T, _, RVPos) when length(T) >= RVPos    -> step3(T);
 step2b("tiare" ++ T, _, RVPos) when length(T) >= RVPos    -> step3(T);
 step2b("zeire" ++ T, _, RVPos) when length(T) >= RVPos    -> step3(T);
@@ -245,25 +245,25 @@ step2b("sessa" ++ T, _, RVPos) when length(T) >= RVPos    -> step3(step2b(T, RVP
 step2b("iare" ++ T, _, RVPos) when length(T) >= RVPos     -> step3(T);
 step2b("sare" ++ T, _, RVPos) when length(T) >= RVPos     -> step3(T);
 step2b("zere" ++ T, _, RVPos) when length(T) >= RVPos     -> step3(T);
-step2b("semâ" ++ T, _, RVPos) when length(T) >= RVPos     -> step3(step2b(T, RVPos));
-step2b("setâ" ++ T, _, RVPos) when length(T) >= RVPos     -> step3(step2b(T, RVPos));
+step2b("semÃ¢" ++ T, _, RVPos) when length(T) >= RVPos     -> step3(step2b(T, RVPos));
+step2b("setÃ¢" ++ T, _, RVPos) when length(T) >= RVPos     -> step3(step2b(T, RVPos));
 step2b("etna" ++ T, _, RVPos) when length(T) >= RVPos     -> step3(step2b(T, RVPos));
 step2b("stna" ++ T, _, RVPos) when length(T) >= RVPos     -> step3(step2b(T, RVPos));
 step2b("essa" ++ T, _, RVPos) when length(T) >= RVPos     -> step3(step2b(T, RVPos));
-step2b("seé" ++ T, _, RVPos) when length(T) >= RVPos      -> step3(T);
+step2b("seÃ©" ++ T, _, RVPos) when length(T) >= RVPos      -> step3(T);
 step2b("are" ++ T, _, RVPos) when length(T) >= RVPos      -> step3(T);
 step2b("zei" ++ T, _, RVPos) when length(T) >= RVPos      -> step3(T);
 step2b("sia" ++ T, _, RVPos) when length(T) >= RVPos      -> step3(step2b(T, RVPos));
 step2b("tia" ++ T, _, RVPos) when length(T) >= RVPos      -> step3(step2b(T, RVPos));
 step2b("tna" ++ T, _, RVPos) when length(T) >= RVPos      -> step3(step2b(T, RVPos));
-step2b("eé" ++ T, _, RVPos) when length(T) >= RVPos       -> step3(T);
-step2b("sé" ++ T, _, RVPos) when length(T) >= RVPos       -> step3(T);
+step2b("eÃ©" ++ T, _, RVPos) when length(T) >= RVPos       -> step3(T);
+step2b("sÃ©" ++ T, _, RVPos) when length(T) >= RVPos       -> step3(T);
 step2b("re" ++ T, _, RVPos) when length(T) >= RVPos       -> step3(T);
 step2b("ze" ++ T, _, RVPos) when length(T) >= RVPos       -> step3(T);
-step2b("tâ" ++ T, _, RVPos) when length(T) >= RVPos       -> step3(step2b(T, RVPos));
+step2b("tÃ¢" ++ T, _, RVPos) when length(T) >= RVPos       -> step3(step2b(T, RVPos));
 step2b("ia" ++ T, _, RVPos) when length(T) >= RVPos       -> step3(step2b(T, RVPos));
 step2b("sa" ++ T, _, RVPos) when length(T) >= RVPos       -> step3(step2b(T, RVPos));
-step2b([$é | T], _, RVPos) when length(T) >= RVPos        -> step3(T);
+step2b([$Ã© | T], _, RVPos) when length(T) >= RVPos        -> step3(T);
 step2b([$a | T], _, RVPos) when length(T) >= RVPos        -> step3(step2b(T, RVPos));
 step2b("snoi" ++ T, R2Pos, RVPos) when length(T) >= R2Pos,
                                        length(T) >= RVPos -> step3(T);
@@ -277,25 +277,25 @@ step2b(Word, _)                                       -> Word.
 %% step 3
 -spec step3(string()) -> string().
 step3([$Y | Tail]) -> [$i | Tail];
-step3([$ç | Tail]) -> [$c | Tail];
+step3([$Ã§ | Tail]) -> [$c | Tail];
 step3(Word)        -> Word.
 
 %% step 4
 -spec step4(string(), r2pos(), rvpos()) -> string().
 step4([$s, Char | Tail], R2Pos, RVPos) when Char =/= $a, Char =/= $i,
                                             Char =/= $o, Char =/= $u,
-                                            Char =/= $è, Char =/= $s ->
+                                            Char =/= $Ã¨, Char =/= $s ->
     step4([Char | Tail], R2Pos, RVPos);
 step4("noi" ++ Tail, R2Pos, RVPos) when ((hd(Tail) =:= $s) or (hd(Tail) =:= $t)),
                                         length(Tail) >= RVPos,
                                         length(Tail) >= R2Pos ->
     Tail;
-step4("erèi" ++ Tail, _, RVPos) when length(Tail) >= RVPos -> [$i | Tail];
-step4("erèI" ++ Tail, _, RVPos) when length(Tail) >= RVPos -> [$i | Tail];
+step4("erÃ¨i" ++ Tail, _, RVPos) when length(Tail) >= RVPos -> [$i | Tail];
+step4("erÃ¨I" ++ Tail, _, RVPos) when length(Tail) >= RVPos -> [$i | Tail];
 step4("rei" ++ Tail, _, RVPos) when length(Tail) >= RVPos  -> [$i | Tail];
 step4("reI" ++ Tail, _, RVPos) when length(Tail) >= RVPos  -> [$i | Tail];
 step4([$e | Tail], _, RVPos) when length(Tail) >= RVPos    -> Tail;
-step4("ëug" ++ Tail, _, RVPos) when length(Tail) >= RVPos  -> "ug" ++ Tail;
+step4("Ã«ug" ++ Tail, _, RVPos) when length(Tail) >= RVPos  -> "ug" ++ Tail;
 step4(Word, _, _) -> Word.
 
 %% step 5
@@ -309,11 +309,11 @@ step5(Word)           -> Word.
 
 %% step 6
 -spec step6(string()) -> string().
-step6([Char, $é | Tail]) when not ?is_a_vowel(Char)          -> [Char, $e | Tail];
-step6([Char, $è | Tail]) when not ?is_a_vowel(Char)          -> [Char, $e | Tail];
-step6([Char1, Char2, $é | Tail]) when not ?is_a_vowel(Char1),
+step6([Char, $Ã© | Tail]) when not ?is_a_vowel(Char)          -> [Char, $e | Tail];
+step6([Char, $Ã¨ | Tail]) when not ?is_a_vowel(Char)          -> [Char, $e | Tail];
+step6([Char1, Char2, $Ã© | Tail]) when not ?is_a_vowel(Char1),
                                       not ?is_a_vowel(Char2) -> [Char1, Char2, $e | Tail];
-step6([Char1, Char2, $è | Tail]) when not ?is_a_vowel(Char1),
+step6([Char1, Char2, $Ã¨ | Tail]) when not ?is_a_vowel(Char1),
                                       not ?is_a_vowel(Char2) -> [Char1, Char2, $e | Tail];
 step6(Word)                                                  -> Word.
 

@@ -24,9 +24,9 @@
          or (Char =:= $o)
          or (Char =:= $u)
          or (Char =:= $y)
-         or (Char =:= $æ)
-         or (Char =:= $å)
-         or (Char =:= $ø))).
+         or (Char =:= $Ã¦)
+         or (Char =:= $Ã¥)
+         or (Char =:= $Ã¸))).
 
 -define(is_a_valid_s_ending(Char),
         ((Char =:= $a)
@@ -48,7 +48,7 @@
          or (Char =:= $v)
          or (Char =:= $y)
          or (Char =:= $z)
-         or (Char =:= $å))).
+         or (Char =:= $Ã¥))).
 
 %%-----------------------------------------------------------------------------
 %% Types
@@ -137,7 +137,7 @@ step3("gile" ++ Tail, R1Pos) when length(Tail) >= R1Pos -> step2(Tail, R1Pos);
 step3("gil" ++ Tail, R1Pos) when length(Tail) >= R1Pos  -> step2(Tail, R1Pos);
 step3("gi" ++ Tail, R1Pos) when length(Tail) >= R1Pos   -> step2(Tail, R1Pos);
 step3("sle" ++ Tail, R1Pos) when length(Tail) >= R1Pos  -> step2(Tail, R1Pos);
-step3("tsøl" ++ Tail, R1Pos) when length(Tail) >= R1Pos -> "søl" ++ Tail;
+step3("tsÃ¸l" ++ Tail, R1Pos) when length(Tail) >= R1Pos -> "sÃ¸l" ++ Tail;
 step3(Word, _)                                          -> Word.
 
 %% step 4

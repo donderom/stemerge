@@ -24,7 +24,7 @@
          or (Char =:= $o)
          or (Char =:= $u)
          or (Char =:= $y)
-         or (Char =:= $è))).
+         or (Char =:= $Ã¨))).
 
 -define(is_a_valid_s_ending(Char),
         ((Char =/= $j)
@@ -202,15 +202,15 @@ bootstrap(Word) ->
     {Word1, R1Pos, R2Pos}.
 
 -spec remove_accents(string()) -> string().
-remove_accents([Char | Tail]) when ((Char =:= $ä) or (Char =:= $á)) ->
+remove_accents([Char | Tail]) when ((Char =:= $Ã¤) or (Char =:= $Ã¡)) ->
     [$a | remove_accents(Tail)];
-remove_accents([Char | Tail]) when ((Char =:= $ë) or (Char =:= $é)) ->
+remove_accents([Char | Tail]) when ((Char =:= $Ã«) or (Char =:= $Ã©)) ->
     [$e | remove_accents(Tail)];
-remove_accents([Char | Tail]) when ((Char =:= $ï) or (Char =:= $í)) ->
+remove_accents([Char | Tail]) when ((Char =:= $Ã¯) or (Char =:= $Ã­)) ->
     [$i | remove_accents(Tail)];
-remove_accents([Char | Tail]) when ((Char =:= $ö) or (Char =:= $ó)) ->
+remove_accents([Char | Tail]) when ((Char =:= $Ã¶) or (Char =:= $Ã³)) ->
     [$o | remove_accents(Tail)];
-remove_accents([Char | Tail]) when ((Char =:= $ü) or (Char =:= $ú)) ->
+remove_accents([Char | Tail]) when ((Char =:= $Ã¼) or (Char =:= $Ãº)) ->
     [$u | remove_accents(Tail)];
 remove_accents([Char | Tail]) ->
     [Char | remove_accents(Tail)];

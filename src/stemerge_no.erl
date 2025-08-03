@@ -24,9 +24,9 @@
          or (Char =:= $o)
          or (Char =:= $u)
          or (Char =:= $y)
-         or (Char =:= $æ)
-         or (Char =:= $å)
-         or (Char =:= $ø))).
+         or (Char =:= $Ã¦)
+         or (Char =:= $Ã¥)
+         or (Char =:= $Ã¸))).
 
 -define(is_a_valid_s_ending(PrecededChar, Char),
         ((Char =:= $b)

@@ -24,9 +24,9 @@
          or (Char =:= $o)
          or (Char =:= $u)
          or (Char =:= $y)
-         or (Char =:= $ä)
-         or (Char =:= $ö)
-         or (Char =:= $ü))).
+         or (Char =:= $Ã¤)
+         or (Char =:= $Ã¶)
+         or (Char =:= $Ã¼))).
 
 -define(is_a_valid_s_ending(Char),
         ((Char =:= $b)
@@ -135,11 +135,11 @@ post_process([$Y | Tail], Acc) ->
     post_process(Tail, [$y | Acc]);
 post_process([$U | Tail], Acc) ->
     post_process(Tail, [$u | Acc]);
-post_process([$ä | Tail], Acc) ->
+post_process([$Ã¤ | Tail], Acc) ->
     post_process(Tail, [$a | Acc]);
-post_process([$ö | Tail], Acc) ->
+post_process([$Ã¶ | Tail], Acc) ->
     post_process(Tail, [$o | Acc]);
-post_process([$ü | Tail], Acc) ->
+post_process([$Ã¼ | Tail], Acc) ->
     post_process(Tail, [$u | Acc]);
 post_process([Char | Tail], Acc) ->
     post_process(Tail, [Char | Acc]);

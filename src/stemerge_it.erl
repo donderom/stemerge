@@ -23,11 +23,11 @@
          or (Char =:= $i)
          or (Char =:= $o)
          or (Char =:= $u)
-         or (Char =:= $à)
-         or (Char =:= $è)
-         or (Char =:= $ì)
-         or (Char =:= $ò)
-         or (Char =:= $ù))).
+         or (Char =:= $Ã )
+         or (Char =:= $Ã¨)
+         or (Char =:= $Ã¬)
+         or (Char =:= $Ã²)
+         or (Char =:= $Ã¹))).
 
 %%-----------------------------------------------------------------------------
 %% Types
@@ -131,9 +131,9 @@ step1("imsi" ++ Tail, _, R2Pos, _) when length(Tail) >= R2Pos  -> Tail;
 step1("atsi" ++ Tail, _, R2Pos, _) when length(Tail) >= R2Pos  -> Tail;
 step1("etsi" ++ Tail, _, R2Pos, _) when length(Tail) >= R2Pos  -> Tail;
 step1("itsi" ++ Tail, _, R2Pos, _) when length(Tail) >= R2Pos  -> Tail;
-step1("àtsi" ++ Tail, _, R2Pos, _) when length(Tail) >= R2Pos  -> Tail;
-step1("ètsi" ++ Tail, _, R2Pos, _) when length(Tail) >= R2Pos  -> Tail;
-step1("ìtsi" ++ Tail, _, R2Pos, _) when length(Tail) >= R2Pos  -> Tail;
+step1("Ã tsi" ++ Tail, _, R2Pos, _) when length(Tail) >= R2Pos  -> Tail;
+step1("Ã¨tsi" ++ Tail, _, R2Pos, _) when length(Tail) >= R2Pos  -> Tail;
+step1("Ã¬tsi" ++ Tail, _, R2Pos, _) when length(Tail) >= R2Pos  -> Tail;
 step1("etna" ++ Tail, _, R2Pos, _) when length(Tail) >= R2Pos  -> Tail;
 step1("itna" ++ Tail, _, R2Pos, _) when length(Tail) >= R2Pos  -> Tail;
 step1("oci" ++ Tail, _, R2Pos, _) when length(Tail) >= R2Pos   -> Tail;
@@ -166,7 +166,7 @@ step1("itnema" ++ Tail, _, _, RVPos) when length(Tail) >= RVPos -> Tail;
 step1("otnemi" ++ Tail, _, _, RVPos) when length(Tail) >= RVPos -> Tail;
 step1("itnemi" ++ Tail, _, _, RVPos) when length(Tail) >= RVPos -> Tail;
 
-step1("àti" ++ Tail, _, R2Pos, _) when length(Tail) >= R2Pos -> step1d(Tail, R2Pos);
+step1("Ã ti" ++ Tail, _, R2Pos, _) when length(Tail) >= R2Pos -> step1d(Tail, R2Pos);
 
 step1("ovi" ++ Tail, _, R2Pos, _) when length(Tail) >= R2Pos -> step1a(step1c(Tail, R2Pos), R2Pos);
 step1("ivi" ++ Tail, _, R2Pos, _) when length(Tail) >= R2Pos -> step1a(step1c(Tail, R2Pos), R2Pos);
@@ -270,16 +270,16 @@ step2("ota" ++ Tail, RVPos) when length(Tail) >= RVPos      -> Tail;
 step2("ava" ++ Tail, RVPos) when length(Tail) >= RVPos      -> Tail;
 step2("iva" ++ Tail, RVPos) when length(Tail) >= RVPos      -> Tail;
 step2("ova" ++ Tail, RVPos) when length(Tail) >= RVPos      -> Tail;
-step2("àre" ++ Tail, RVPos) when length(Tail) >= RVPos      -> Tail;
+step2("Ã re" ++ Tail, RVPos) when length(Tail) >= RVPos      -> Tail;
 step2("ere" ++ Tail, RVPos) when length(Tail) >= RVPos      -> Tail;
-step2("òre" ++ Tail, RVPos) when length(Tail) >= RVPos      -> Tail;
+step2("Ã²re" ++ Tail, RVPos) when length(Tail) >= RVPos      -> Tail;
 step2("ete" ++ Tail, RVPos) when length(Tail) >= RVPos      -> Tail;
 step2("ave" ++ Tail, RVPos) when length(Tail) >= RVPos      -> Tail;
 step2("ive" ++ Tail, RVPos) when length(Tail) >= RVPos      -> Tail;
 step2("ove" ++ Tail, RVPos) when length(Tail) >= RVPos      -> Tail;
-step2("àri" ++ Tail, RVPos) when length(Tail) >= RVPos      -> Tail;
+step2("Ã ri" ++ Tail, RVPos) when length(Tail) >= RVPos      -> Tail;
 step2("eri" ++ Tail, RVPos) when length(Tail) >= RVPos      -> Tail;
-step2("òri" ++ Tail, RVPos) when length(Tail) >= RVPos      -> Tail;
+step2("Ã²ri" ++ Tail, RVPos) when length(Tail) >= RVPos      -> Tail;
 step2("ati" ++ Tail, RVPos) when length(Tail) >= RVPos      -> Tail;
 step2("eti" ++ Tail, RVPos) when length(Tail) >= RVPos      -> Tail;
 step2("iti" ++ Tail, RVPos) when length(Tail) >= RVPos      -> Tail;
@@ -302,10 +302,10 @@ step3a([$a | Tail], RVPos) when length(Tail) >= RVPos -> after_step3a(Tail, RVPo
 step3a([$e | Tail], RVPos) when length(Tail) >= RVPos -> after_step3a(Tail, RVPos);
 step3a([$i | Tail], RVPos) when length(Tail) >= RVPos -> after_step3a(Tail, RVPos);
 step3a([$o | Tail], RVPos) when length(Tail) >= RVPos -> after_step3a(Tail, RVPos);
-step3a([$à | Tail], RVPos) when length(Tail) >= RVPos -> after_step3a(Tail, RVPos);
-step3a([$è | Tail], RVPos) when length(Tail) >= RVPos -> after_step3a(Tail, RVPos);
-step3a([$ì | Tail], RVPos) when length(Tail) >= RVPos -> after_step3a(Tail, RVPos);
-step3a([$ò | Tail], RVPos) when length(Tail) >= RVPos -> after_step3a(Tail, RVPos);
+step3a([$Ã  | Tail], RVPos) when length(Tail) >= RVPos -> after_step3a(Tail, RVPos);
+step3a([$Ã¨ | Tail], RVPos) when length(Tail) >= RVPos -> after_step3a(Tail, RVPos);
+step3a([$Ã¬ | Tail], RVPos) when length(Tail) >= RVPos -> after_step3a(Tail, RVPos);
+step3a([$Ã² | Tail], RVPos) when length(Tail) >= RVPos -> after_step3a(Tail, RVPos);
 step3a(Word, _)                                       -> Word.
 
 %% after step 3a
@@ -344,16 +344,16 @@ bootstrap(Word) ->
     {Word1, R1Pos, R2Pos, RVPos}.
 
 -spec replace_accents(string()) -> string().
-replace_accents([$á | Tail]) ->
-    [$à | replace_accents(Tail)];
-replace_accents([$é | Tail]) ->
-    [$è | replace_accents(Tail)];
-replace_accents([$í | Tail]) ->
-    [$ì | replace_accents(Tail)];
-replace_accents([$ó | Tail]) ->
-    [$ò | replace_accents(Tail)];
-replace_accents([$ú | Tail]) ->
-    [$ù | replace_accents(Tail)];
+replace_accents([$Ã¡ | Tail]) ->
+    [$Ã  | replace_accents(Tail)];
+replace_accents([$Ã© | Tail]) ->
+    [$Ã¨ | replace_accents(Tail)];
+replace_accents([$Ã­ | Tail]) ->
+    [$Ã¬ | replace_accents(Tail)];
+replace_accents([$Ã³ | Tail]) ->
+    [$Ã² | replace_accents(Tail)];
+replace_accents([$Ãº | Tail]) ->
+    [$Ã¹ | replace_accents(Tail)];
 replace_accents([Char | Tail]) ->
     [Char | replace_accents(Tail)];
 replace_accents([]) ->

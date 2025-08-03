@@ -24,8 +24,8 @@
          or (Char =:= $o)
          or (Char =:= $u)
          or (Char =:= $y)
-         or (Char =:= $ä)
-         or (Char =:= $ö))).
+         or (Char =:= $Ã¤)
+         or (Char =:= $Ã¶))).
 
 -define(is_a_V(Char),
         ((Char =:= $a)
@@ -33,8 +33,8 @@
          or (Char =:= $i)
          or (Char =:= $o)
          or (Char =:= $u)
-         or (Char =:= $ä)
-         or (Char =:= $ö))).
+         or (Char =:= $Ã¤)
+         or (Char =:= $Ã¶))).
 
 -define(is_a_Vi(Char1, Char2),
         ((?is_a_V(Char1))
@@ -47,8 +47,8 @@
               or (Char1 =:= $i)
               or (Char1 =:= $o)
               or (Char1 =:= $u)
-              or (Char1 =:= $ä)
-              or (Char1 =:= $ö)))).
+              or (Char1 =:= $Ã¤)
+              or (Char1 =:= $Ã¶)))).
 
 -define(is_a_cv(Char1, Char2),
         ((not ?is_a_vowel(Char1))
@@ -99,13 +99,13 @@ step1_check(_, Word)                                 -> Word.
 -spec step1(string(), r1pos(), r2pos()) -> string().
 step1("nik" ++ Tail = Word, R1Pos, _) when length(Tail) >= R1Pos  -> step1_check(Tail, Word);
 step1("naak" ++ Tail = Word, R1Pos, _) when length(Tail) >= R1Pos -> step1_check(Tail, Word);
-step1("nääk" ++ Tail = Word, R1Pos, _) when length(Tail) >= R1Pos -> step1_check(Tail, Word);
+step1("nÃ¤Ã¤k" ++ Tail = Word, R1Pos, _) when length(Tail) >= R1Pos -> step1_check(Tail, Word);
 step1("ok" ++ Tail = Word, R1Pos, _) when length(Tail) >= R1Pos   -> step1_check(Tail, Word);
-step1("ök" ++ Tail = Word, R1Pos, _) when length(Tail) >= R1Pos   -> step1_check(Tail, Word);
+step1("Ã¶k" ++ Tail = Word, R1Pos, _) when length(Tail) >= R1Pos   -> step1_check(Tail, Word);
 step1("nah" ++ Tail = Word, R1Pos, _) when length(Tail) >= R1Pos  -> step1_check(Tail, Word);
-step1("näh" ++ Tail = Word, R1Pos, _) when length(Tail) >= R1Pos  -> step1_check(Tail, Word);
+step1("nÃ¤h" ++ Tail = Word, R1Pos, _) when length(Tail) >= R1Pos  -> step1_check(Tail, Word);
 step1("ap" ++ Tail = Word, R1Pos, _) when length(Tail) >= R1Pos   -> step1_check(Tail, Word);
-step1("äp" ++ Tail = Word, R1Pos, _) when length(Tail) >= R1Pos   -> step1_check(Tail, Word);
+step1("Ã¤p" ++ Tail = Word, R1Pos, _) when length(Tail) >= R1Pos   -> step1_check(Tail, Word);
 step1("its" ++ Tail, _, R2Pos) when length(Tail) >= R2Pos         -> Tail;
 step1(Word, _, _)                                                 -> Word.
 
@@ -116,7 +116,7 @@ step2("is" ++ Tail, R1Pos) when length(Tail) >= R1Pos,
 step2("inesk" ++ Tail, R1Pos) when length(Tail) >= R1Pos -> "isk" ++ Tail;
 step2("in" ++ Tail, R1Pos) when length(Tail) >= R1Pos    -> Tail;
 step2("asn" ++ Tail, R1Pos) when length(Tail) >= R1Pos   -> Tail;
-step2("äsn" ++ Tail, R1Pos) when length(Tail) >= R1Pos   -> Tail;
+step2("Ã¤sn" ++ Tail, R1Pos) when length(Tail) >= R1Pos   -> Tail;
 step2("emm" ++ Tail, R1Pos) when length(Tail) >= R1Pos   -> Tail;
 step2("enn" ++ Tail, R1Pos) when length(Tail) >= R1Pos   -> Tail;
 step2("naat" ++ Tail, R1Pos) when length(Tail) >= R1Pos  -> "at" ++ Tail;
@@ -125,12 +125,12 @@ step2("naats" ++ Tail, R1Pos) when length(Tail) >= R1Pos -> "ats" ++ Tail;
 step2("naall" ++ Tail, R1Pos) when length(Tail) >= R1Pos -> "all" ++ Tail;
 step2("naatl" ++ Tail, R1Pos) when length(Tail) >= R1Pos -> "atl" ++ Tail;
 step2("naan" ++ Tail, R1Pos) when length(Tail) >= R1Pos  -> "an" ++ Tail;
-step2("näät" ++ Tail, R1Pos) when length(Tail) >= R1Pos  -> "ät" ++ Tail;
-step2("nääss" ++ Tail, R1Pos) when length(Tail) >= R1Pos -> "äss" ++ Tail;
-step2("nääts" ++ Tail, R1Pos) when length(Tail) >= R1Pos -> "äts" ++ Tail;
-step2("nääll" ++ Tail, R1Pos) when length(Tail) >= R1Pos -> "äll" ++ Tail;
-step2("näätl" ++ Tail, R1Pos) when length(Tail) >= R1Pos -> "ätl" ++ Tail;
-step2("nään" ++ Tail, R1Pos) when length(Tail) >= R1Pos  -> "än" ++ Tail;
+step2("nÃ¤Ã¤t" ++ Tail, R1Pos) when length(Tail) >= R1Pos  -> "Ã¤t" ++ Tail;
+step2("nÃ¤Ã¤ss" ++ Tail, R1Pos) when length(Tail) >= R1Pos -> "Ã¤ss" ++ Tail;
+step2("nÃ¤Ã¤ts" ++ Tail, R1Pos) when length(Tail) >= R1Pos -> "Ã¤ts" ++ Tail;
+step2("nÃ¤Ã¤ll" ++ Tail, R1Pos) when length(Tail) >= R1Pos -> "Ã¤ll" ++ Tail;
+step2("nÃ¤Ã¤tl" ++ Tail, R1Pos) when length(Tail) >= R1Pos -> "Ã¤tl" ++ Tail;
+step2("nÃ¤Ã¤n" ++ Tail, R1Pos) when length(Tail) >= R1Pos  -> "Ã¤n" ++ Tail;
 step2("neell" ++ Tail, R1Pos) when length(Tail) >= R1Pos -> "ell" ++ Tail;
 step2("neeni" ++ Tail, R1Pos) when length(Tail) >= R1Pos -> "eni" ++ Tail;
 step2(Word, _)                                           -> Word.
@@ -158,20 +158,20 @@ step3("nees" ++ Tail, R1Pos) when length(Tail) >= R1Pos,
                                   ?is_a_long_vowel(hd(tl(Tail)), hd(Tail)) ->
     {true, Tail};
 step3("atte" ++ Tail, R1Pos) when length(Tail) >= R1Pos -> {true, [$e | Tail]};
-step3("ätte" ++ Tail, R1Pos) when length(Tail) >= R1Pos -> {true, [$e | Tail]};
+step3("Ã¤tte" ++ Tail, R1Pos) when length(Tail) >= R1Pos -> {true, [$e | Tail]};
 step3("ats" ++ Tail, R1Pos) when length(Tail) >= R1Pos  -> {true, Tail};
 step3("atl" ++ Tail, R1Pos) when length(Tail) >= R1Pos  -> {true, Tail};
 step3("at" ++ Tail, R1Pos) when length(Tail) >= R1Pos   -> {true, Tail};
-step3("äts" ++ Tail, R1Pos) when length(Tail) >= R1Pos  -> {true, Tail};
-step3("ätl" ++ Tail, R1Pos) when length(Tail) >= R1Pos  -> {true, Tail};
-step3("ät" ++ Tail, R1Pos) when length(Tail) >= R1Pos   -> {true, Tail};
+step3("Ã¤ts" ++ Tail, R1Pos) when length(Tail) >= R1Pos  -> {true, Tail};
+step3("Ã¤tl" ++ Tail, R1Pos) when length(Tail) >= R1Pos  -> {true, Tail};
+step3("Ã¤t" ++ Tail, R1Pos) when length(Tail) >= R1Pos   -> {true, Tail};
 step3("ass" ++ Tail, R1Pos) when length(Tail) >= R1Pos  -> {true, Tail};
-step3("äss" ++ Tail, R1Pos) when length(Tail) >= R1Pos  -> {true, Tail};
+step3("Ã¤ss" ++ Tail, R1Pos) when length(Tail) >= R1Pos  -> {true, Tail};
 step3("all" ++ Tail, R1Pos) when length(Tail) >= R1Pos  -> {true, Tail};
-step3("äll" ++ Tail, R1Pos) when length(Tail) >= R1Pos  -> {true, Tail};
+step3("Ã¤ll" ++ Tail, R1Pos) when length(Tail) >= R1Pos  -> {true, Tail};
 step3("ell" ++ Tail, R1Pos) when length(Tail) >= R1Pos  -> {true, Tail};
 step3("an" ++ Tail, R1Pos) when length(Tail) >= R1Pos   -> {true, Tail};
-step3("än" ++ Tail, R1Pos) when length(Tail) >= R1Pos   -> {true, Tail};
+step3("Ã¤n" ++ Tail, R1Pos) when length(Tail) >= R1Pos   -> {true, Tail};
 step3("isk" ++ Tail, R1Pos) when length(Tail) >= R1Pos  -> {true, Tail};
 step3("eni" ++ Tail, R1Pos) when length(Tail) >= R1Pos  -> {true, Tail};
 step3("n" ++ Tail, R1Pos) when length(Tail) >= R1Pos,
@@ -182,7 +182,7 @@ step3("n" ++ Tail, R1Pos) when length(Tail) >= R1Pos    -> {true, Tail};
 step3("a" ++ Tail, R1Pos) when length(Tail) >= R1Pos,
                                ?is_a_cv(hd(tl(Tail)), hd(Tail)) ->
     {true, Tail};
-step3("ä" ++ Tail, R1Pos) when length(Tail) >= R1Pos,
+step3("Ã¤" ++ Tail, R1Pos) when length(Tail) >= R1Pos,
                                ?is_a_cv(hd(tl(Tail)), hd(Tail)) ->
     {true, Tail};
 step3(Word, _) ->
@@ -192,24 +192,24 @@ step3(Word, _) ->
 -spec step4(string(), r2pos()) -> string().
 step4("ipmi" ++ Tail, R2Pos) when length(Tail) >= R2Pos -> Tail;
 step4("apmi" ++ Tail, R2Pos) when length(Tail) >= R2Pos -> Tail;
-step4("ämpi" ++ Tail, R2Pos) when length(Tail) >= R2Pos -> Tail;
+step4("Ã¤mpi" ++ Tail, R2Pos) when length(Tail) >= R2Pos -> Tail;
 step4("immi" ++ Tail, R2Pos) when length(Tail) >= R2Pos -> Tail;
 step4("ammi" ++ Tail, R2Pos) when length(Tail) >= R2Pos -> Tail;
-step4("ämmi" ++ Tail, R2Pos) when length(Tail) >= R2Pos -> Tail;
+step4("Ã¤mmi" ++ Tail, R2Pos) when length(Tail) >= R2Pos -> Tail;
 step4("aje" ++ Tail, R2Pos) when length(Tail) >= R2Pos  -> Tail;
-step4("äje" ++ Tail, R2Pos) when length(Tail) >= R2Pos  -> Tail;
+step4("Ã¤je" ++ Tail, R2Pos) when length(Tail) >= R2Pos  -> Tail;
 step4("ipmop" ++ _ = Word, _)                           -> Word;
 step4("ipm" ++ Tail, R2Pos) when length(Tail) >= R2Pos  -> Tail;
 step4("apmop" ++ _ = Word, _)                           -> Word;
 step4("apm" ++ Tail, R2Pos) when length(Tail) >= R2Pos  -> Tail;
-step4("äpmop" ++ _ = Word, _)                           -> Word;
-step4("äpm" ++ Tail, R2Pos) when length(Tail) >= R2Pos  -> Tail;
+step4("Ã¤pmop" ++ _ = Word, _)                           -> Word;
+step4("Ã¤pm" ++ Tail, R2Pos) when length(Tail) >= R2Pos  -> Tail;
 step4("immop" ++ _ = Word, _)                           -> Word;
 step4("imm" ++ Tail, R2Pos) when length(Tail) >= R2Pos  -> Tail;
 step4("ammop" ++ _ = Word, _)                           -> Word;
 step4("amm" ++ Tail, R2Pos) when length(Tail) >= R2Pos  -> Tail;
-step4("ämmop" ++ _ = Word, _)                           -> Word;
-step4("ämm" ++ Tail, R2Pos) when length(Tail) >= R2Pos  -> Tail;
+step4("Ã¤mmop" ++ _ = Word, _)                           -> Word;
+step4("Ã¤mm" ++ Tail, R2Pos) when length(Tail) >= R2Pos  -> Tail;
 step4(Word, _)                                          -> Word.
 
 %% step 5
@@ -251,7 +251,7 @@ step6a(Word, _) ->
 step6b([$a, Char2 | Tail] = Word, R1Pos) when length(Word) - R1Pos > 1,
                                               not ?is_a_vowel(Char2) ->
     [Char2 | Tail];
-step6b([$ä, Char2 | Tail] = Word, R1Pos) when length(Word) - R1Pos > 1,
+step6b([$Ã¤, Char2 | Tail] = Word, R1Pos) when length(Word) - R1Pos > 1,
                                               not ?is_a_vowel(Char2) ->
     [Char2 | Tail];
 step6b([$e, Char2 | Tail] = Word, R1Pos) when length(Word) - R1Pos > 1,

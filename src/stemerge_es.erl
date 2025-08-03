@@ -23,12 +23,12 @@
          or (Char =:= $i)
          or (Char =:= $o)
          or (Char =:= $u)
-         or (Char =:= $á)
-         or (Char =:= $é)
-         or (Char =:= $í)
-         or (Char =:= $ó)
-         or (Char =:= $ú)
-         or (Char =:= $ü))).
+         or (Char =:= $Ã¡)
+         or (Char =:= $Ã©)
+         or (Char =:= $Ã­)
+         or (Char =:= $Ã³)
+         or (Char =:= $Ãº)
+         or (Char =:= $Ã¼))).
 
 %%-----------------------------------------------------------------------------
 %% Types
@@ -78,11 +78,11 @@ step0("ol" ++ Tail = Word, RVPos)    -> step0(Tail, Word, RVPos);
 step0(Word, _)                       -> Word.
 
 -spec step0(string(), string(), rvpos()) -> string().
-step0("odnéi" ++ Tail, _, RVPos) when length(Tail) >= RVPos -> "odnei" ++ Tail;
-step0("odná" ++ Tail, _, RVPos) when length(Tail) >= RVPos  -> "odna" ++ Tail;
-step0("rá" ++ Tail, _, RVPos) when length(Tail) >= RVPos    -> "ra" ++ Tail;
-step0("ré" ++ Tail, _, RVPos) when length(Tail) >= RVPos    -> "re" ++ Tail;
-step0("rí" ++ Tail, _, RVPos) when length(Tail) >= RVPos    -> "ri" ++ Tail;
+step0("odnÃ©i" ++ Tail, _, RVPos) when length(Tail) >= RVPos -> "odnei" ++ Tail;
+step0("odnÃ¡" ++ Tail, _, RVPos) when length(Tail) >= RVPos  -> "odna" ++ Tail;
+step0("rÃ¡" ++ Tail, _, RVPos) when length(Tail) >= RVPos    -> "ra" ++ Tail;
+step0("rÃ©" ++ Tail, _, RVPos) when length(Tail) >= RVPos    -> "re" ++ Tail;
+step0("rÃ­" ++ Tail, _, RVPos) when length(Tail) >= RVPos    -> "ri" ++ Tail;
 step0("odnei" ++ Tail, _, RVPos) when length(Tail) >= RVPos -> "odnei" ++ Tail;
 step0("odna" ++ Tail, _, RVPos) when length(Tail) >= RVPos  -> "odna" ++ Tail;
 step0("ra" ++ Tail, _, RVPos) when length(Tail) >= RVPos    -> "ra" ++ Tail;
@@ -122,16 +122,16 @@ step1("saroda" ++ Tail, _, R2Pos, _) when length(Tail) >= R2Pos  -> step1a(Tail,
 step1("seroda" ++ Tail, _, R2Pos, _) when length(Tail) >= R2Pos  -> step1a(Tail, R2Pos);
 step1("saicna" ++ Tail, _, R2Pos, _) when length(Tail) >= R2Pos  -> step1a(Tail, R2Pos);
 step1("aroda" ++ Tail, _, R2Pos, _) when length(Tail) >= R2Pos   -> step1a(Tail, R2Pos);
-step1("nóica" ++ Tail, _, R2Pos, _) when length(Tail) >= R2Pos   -> step1a(Tail, R2Pos);
+step1("nÃ³ica" ++ Tail, _, R2Pos, _) when length(Tail) >= R2Pos   -> step1a(Tail, R2Pos);
 step1("setna" ++ Tail, _, R2Pos, _) when length(Tail) >= R2Pos   -> step1a(Tail, R2Pos);
 step1("aicna" ++ Tail, _, R2Pos, _) when length(Tail) >= R2Pos   -> step1a(Tail, R2Pos);
 step1("roda" ++ Tail, _, R2Pos, _) when length(Tail) >= R2Pos    -> step1a(Tail, R2Pos);
 step1("etna" ++ Tail, _, R2Pos, _) when length(Tail) >= R2Pos    -> step1a(Tail, R2Pos);
 
-step1("saígol" ++ Tail, _, R2Pos, _) when length(Tail) >= R2Pos -> "gol" ++ Tail;
-step1("aígol" ++ Tail, _, R2Pos, _) when length(Tail) >= R2Pos  -> "gol" ++ Tail;
+step1("saÃ­gol" ++ Tail, _, R2Pos, _) when length(Tail) >= R2Pos -> "gol" ++ Tail;
+step1("aÃ­gol" ++ Tail, _, R2Pos, _) when length(Tail) >= R2Pos  -> "gol" ++ Tail;
 
-step1("nóicu" ++ Tail, _, R2Pos, _) when length(Tail) >= R2Pos   -> [$u | Tail];
+step1("nÃ³icu" ++ Tail, _, R2Pos, _) when length(Tail) >= R2Pos   -> [$u | Tail];
 step1("senoicu" ++ Tail, _, R2Pos, _) when length(Tail) >= R2Pos -> [$u | Tail];
 
 step1("saicne" ++ Tail, _, R2Pos, _) when length(Tail) >= R2Pos -> "etne" ++ Tail;
@@ -196,7 +196,7 @@ step2a("sey" ++ Tail = Word, RVPos) when length(Tail) >= RVPos   -> step2a(Tail,
 step2a("ay" ++ Tail = Word, RVPos) when length(Tail) >= RVPos    -> step2a(Tail, Word, RVPos);
 step2a("ey" ++ Tail = Word, RVPos) when length(Tail) >= RVPos    -> step2a(Tail, Word, RVPos);
 step2a("oy" ++ Tail = Word, RVPos) when length(Tail) >= RVPos    -> step2a(Tail, Word, RVPos);
-step2a("óy" ++ Tail = Word, RVPos) when length(Tail) >= RVPos    -> step2a(Tail, Word, RVPos);
+step2a("Ã³y" ++ Tail = Word, RVPos) when length(Tail) >= RVPos    -> step2a(Tail, Word, RVPos);
 step2a(Word, RVPos)                                              -> step2b(Word, RVPos).
 
 -spec step2a(string(), string(), rvpos()) -> string().
@@ -205,33 +205,33 @@ step2a(_, Word, RVPos)    -> step2b(Word, RVPos).
 
 %% step 2b
 -spec step2b(string(), rvpos()) -> string().
-step2b("somaíra" ++ Tail, RVPos) when length(Tail) >= RVPos -> Tail;
-step2b("somaíre" ++ Tail, RVPos) when length(Tail) >= RVPos -> Tail;
-step2b("somaíri" ++ Tail, RVPos) when length(Tail) >= RVPos -> Tail;
-step2b("somaréi" ++ Tail, RVPos) when length(Tail) >= RVPos -> Tail;
-step2b("someséi" ++ Tail, RVPos) when length(Tail) >= RVPos -> Tail;
-step2b("siaíra" ++ Tail, RVPos) when length(Tail) >= RVPos  -> Tail;
+step2b("somaÃ­ra" ++ Tail, RVPos) when length(Tail) >= RVPos -> Tail;
+step2b("somaÃ­re" ++ Tail, RVPos) when length(Tail) >= RVPos -> Tail;
+step2b("somaÃ­ri" ++ Tail, RVPos) when length(Tail) >= RVPos -> Tail;
+step2b("somarÃ©i" ++ Tail, RVPos) when length(Tail) >= RVPos -> Tail;
+step2b("somesÃ©i" ++ Tail, RVPos) when length(Tail) >= RVPos -> Tail;
+step2b("siaÃ­ra" ++ Tail, RVPos) when length(Tail) >= RVPos  -> Tail;
 step2b("somera" ++ Tail, RVPos) when length(Tail) >= RVPos  -> Tail;
-step2b("siaíre" ++ Tail, RVPos) when length(Tail) >= RVPos  -> Tail;
+step2b("siaÃ­re" ++ Tail, RVPos) when length(Tail) >= RVPos  -> Tail;
 step2b("somere" ++ Tail, RVPos) when length(Tail) >= RVPos  -> Tail;
-step2b("siaíri" ++ Tail, RVPos) when length(Tail) >= RVPos  -> Tail;
+step2b("siaÃ­ri" ++ Tail, RVPos) when length(Tail) >= RVPos  -> Tail;
 step2b("someri" ++ Tail, RVPos) when length(Tail) >= RVPos  -> Tail;
 step2b("siarei" ++ Tail, RVPos) when length(Tail) >= RVPos  -> Tail;
 step2b("siesei" ++ Tail, RVPos) when length(Tail) >= RVPos  -> Tail;
 step2b("sietsa" ++ Tail, RVPos) when length(Tail) >= RVPos  -> Tail;
 step2b("sietsi" ++ Tail, RVPos) when length(Tail) >= RVPos  -> Tail;
-step2b("somabá" ++ Tail, RVPos) when length(Tail) >= RVPos  -> Tail;
-step2b("somará" ++ Tail, RVPos) when length(Tail) >= RVPos  -> Tail;
-step2b("somesá" ++ Tail, RVPos) when length(Tail) >= RVPos  -> Tail;
-step2b("naíra" ++ Tail, RVPos) when length(Tail) >= RVPos   -> Tail;
-step2b("saíra" ++ Tail, RVPos) when length(Tail) >= RVPos   -> Tail;
-step2b("siéra" ++ Tail, RVPos) when length(Tail) >= RVPos   -> Tail;
-step2b("naíre" ++ Tail, RVPos) when length(Tail) >= RVPos   -> Tail;
-step2b("saíre" ++ Tail, RVPos) when length(Tail) >= RVPos   -> Tail;
-step2b("siére" ++ Tail, RVPos) when length(Tail) >= RVPos   -> Tail;
-step2b("naíri" ++ Tail, RVPos) when length(Tail) >= RVPos   -> Tail;
-step2b("saíri" ++ Tail, RVPos) when length(Tail) >= RVPos   -> Tail;
-step2b("siéri" ++ Tail, RVPos) when length(Tail) >= RVPos   -> Tail;
+step2b("somabÃ¡" ++ Tail, RVPos) when length(Tail) >= RVPos  -> Tail;
+step2b("somarÃ¡" ++ Tail, RVPos) when length(Tail) >= RVPos  -> Tail;
+step2b("somesÃ¡" ++ Tail, RVPos) when length(Tail) >= RVPos  -> Tail;
+step2b("naÃ­ra" ++ Tail, RVPos) when length(Tail) >= RVPos   -> Tail;
+step2b("saÃ­ra" ++ Tail, RVPos) when length(Tail) >= RVPos   -> Tail;
+step2b("siÃ©ra" ++ Tail, RVPos) when length(Tail) >= RVPos   -> Tail;
+step2b("naÃ­re" ++ Tail, RVPos) when length(Tail) >= RVPos   -> Tail;
+step2b("saÃ­re" ++ Tail, RVPos) when length(Tail) >= RVPos   -> Tail;
+step2b("siÃ©re" ++ Tail, RVPos) when length(Tail) >= RVPos   -> Tail;
+step2b("naÃ­ri" ++ Tail, RVPos) when length(Tail) >= RVPos   -> Tail;
+step2b("saÃ­ri" ++ Tail, RVPos) when length(Tail) >= RVPos   -> Tail;
+step2b("siÃ©ri" ++ Tail, RVPos) when length(Tail) >= RVPos   -> Tail;
 step2b("narei" ++ Tail, RVPos) when length(Tail) >= RVPos   -> Tail;
 step2b("nesei" ++ Tail, RVPos) when length(Tail) >= RVPos   -> Tail;
 step2b("norei" ++ Tail, RVPos) when length(Tail) >= RVPos   -> Tail;
@@ -241,17 +241,17 @@ step2b("sesei" ++ Tail, RVPos) when length(Tail) >= RVPos   -> Tail;
 step2b("siaba" ++ Tail, RVPos) when length(Tail) >= RVPos   -> Tail;
 step2b("siara" ++ Tail, RVPos) when length(Tail) >= RVPos   -> Tail;
 step2b("siesa" ++ Tail, RVPos) when length(Tail) >= RVPos   -> Tail;
-step2b("somaí" ++ Tail, RVPos) when length(Tail) >= RVPos   -> Tail;
+step2b("somaÃ­" ++ Tail, RVPos) when length(Tail) >= RVPos   -> Tail;
 step2b("some" ++ Tail, RVPos) when length(Tail) >= RVPos    -> step2b(Tail);
-step2b("nára" ++ Tail, RVPos) when length(Tail) >= RVPos    -> Tail;
-step2b("sára" ++ Tail, RVPos) when length(Tail) >= RVPos    -> Tail;
-step2b("aíra" ++ Tail, RVPos) when length(Tail) >= RVPos    -> Tail;
-step2b("náre" ++ Tail, RVPos) when length(Tail) >= RVPos    -> Tail;
-step2b("sáre" ++ Tail, RVPos) when length(Tail) >= RVPos    -> Tail;
-step2b("aíre" ++ Tail, RVPos) when length(Tail) >= RVPos    -> Tail;
-step2b("nári" ++ Tail, RVPos) when length(Tail) >= RVPos    -> Tail;
-step2b("sári" ++ Tail, RVPos) when length(Tail) >= RVPos    -> Tail;
-step2b("aíri" ++ Tail, RVPos) when length(Tail) >= RVPos    -> Tail;
+step2b("nÃ¡ra" ++ Tail, RVPos) when length(Tail) >= RVPos    -> Tail;
+step2b("sÃ¡ra" ++ Tail, RVPos) when length(Tail) >= RVPos    -> Tail;
+step2b("aÃ­ra" ++ Tail, RVPos) when length(Tail) >= RVPos    -> Tail;
+step2b("nÃ¡re" ++ Tail, RVPos) when length(Tail) >= RVPos    -> Tail;
+step2b("sÃ¡re" ++ Tail, RVPos) when length(Tail) >= RVPos    -> Tail;
+step2b("aÃ­re" ++ Tail, RVPos) when length(Tail) >= RVPos    -> Tail;
+step2b("nÃ¡ri" ++ Tail, RVPos) when length(Tail) >= RVPos    -> Tail;
+step2b("sÃ¡ri" ++ Tail, RVPos) when length(Tail) >= RVPos    -> Tail;
+step2b("aÃ­ri" ++ Tail, RVPos) when length(Tail) >= RVPos    -> Tail;
 step2b("arei" ++ Tail, RVPos) when length(Tail) >= RVPos    -> Tail;
 step2b("esei" ++ Tail, RVPos) when length(Tail) >= RVPos    -> Tail;
 step2b("etsa" ++ Tail, RVPos) when length(Tail) >= RVPos    -> Tail;
@@ -266,41 +266,41 @@ step2b("sada" ++ Tail, RVPos) when length(Tail) >= RVPos    -> Tail;
 step2b("sadi" ++ Tail, RVPos) when length(Tail) >= RVPos    -> Tail;
 step2b("sara" ++ Tail, RVPos) when length(Tail) >= RVPos    -> Tail;
 step2b("sesa" ++ Tail, RVPos) when length(Tail) >= RVPos    -> Tail;
-step2b("siaí" ++ Tail, RVPos) when length(Tail) >= RVPos    -> Tail;
+step2b("siaÃ­" ++ Tail, RVPos) when length(Tail) >= RVPos    -> Tail;
 step2b("soda" ++ Tail, RVPos) when length(Tail) >= RVPos    -> Tail;
 step2b("sodi" ++ Tail, RVPos) when length(Tail) >= RVPos    -> Tail;
 step2b("soma" ++ Tail, RVPos) when length(Tail) >= RVPos    -> Tail;
 step2b("somi" ++ Tail, RVPos) when length(Tail) >= RVPos    -> Tail;
-step2b("sié" ++ Tail, RVPos) when length(Tail) >= RVPos     -> step2b(Tail);
-step2b("ára" ++ Tail, RVPos) when length(Tail) >= RVPos     -> Tail;
-step2b("éra" ++ Tail, RVPos) when length(Tail) >= RVPos     -> Tail;
-step2b("áre" ++ Tail, RVPos) when length(Tail) >= RVPos     -> Tail;
-step2b("ére" ++ Tail, RVPos) when length(Tail) >= RVPos     -> Tail;
-step2b("ári" ++ Tail, RVPos) when length(Tail) >= RVPos     -> Tail;
-step2b("éri" ++ Tail, RVPos) when length(Tail) >= RVPos     -> Tail;
+step2b("siÃ©" ++ Tail, RVPos) when length(Tail) >= RVPos     -> step2b(Tail);
+step2b("Ã¡ra" ++ Tail, RVPos) when length(Tail) >= RVPos     -> Tail;
+step2b("Ã©ra" ++ Tail, RVPos) when length(Tail) >= RVPos     -> Tail;
+step2b("Ã¡re" ++ Tail, RVPos) when length(Tail) >= RVPos     -> Tail;
+step2b("Ã©re" ++ Tail, RVPos) when length(Tail) >= RVPos     -> Tail;
+step2b("Ã¡ri" ++ Tail, RVPos) when length(Tail) >= RVPos     -> Tail;
+step2b("Ã©ri" ++ Tail, RVPos) when length(Tail) >= RVPos     -> Tail;
 step2b("aba" ++ Tail, RVPos) when length(Tail) >= RVPos     -> Tail;
 step2b("ada" ++ Tail, RVPos) when length(Tail) >= RVPos     -> Tail;
 step2b("adi" ++ Tail, RVPos) when length(Tail) >= RVPos     -> Tail;
 step2b("ara" ++ Tail, RVPos) when length(Tail) >= RVPos     -> Tail;
 step2b("esa" ++ Tail, RVPos) when length(Tail) >= RVPos     -> Tail;
-step2b("naí" ++ Tail, RVPos) when length(Tail) >= RVPos     -> Tail;
+step2b("naÃ­" ++ Tail, RVPos) when length(Tail) >= RVPos     -> Tail;
 step2b("oda" ++ Tail, RVPos) when length(Tail) >= RVPos     -> Tail;
 step2b("odi" ++ Tail, RVPos) when length(Tail) >= RVPos     -> Tail;
-step2b("saí" ++ Tail, RVPos) when length(Tail) >= RVPos     -> Tail;
-step2b("siá" ++ Tail, RVPos) when length(Tail) >= RVPos     -> Tail;
+step2b("saÃ­" ++ Tail, RVPos) when length(Tail) >= RVPos     -> Tail;
+step2b("siÃ¡" ++ Tail, RVPos) when length(Tail) >= RVPos     -> Tail;
 step2b("ne" ++ Tail, RVPos) when length(Tail) >= RVPos      -> step2b(Tail);
 step2b("se" ++ Tail, RVPos) when length(Tail) >= RVPos      -> step2b(Tail);
-step2b("aí" ++ Tail, RVPos) when length(Tail) >= RVPos      -> Tail;
+step2b("aÃ­" ++ Tail, RVPos) when length(Tail) >= RVPos      -> Tail;
 step2b("da" ++ Tail, RVPos) when length(Tail) >= RVPos      -> Tail;
 step2b("de" ++ Tail, RVPos) when length(Tail) >= RVPos      -> Tail;
 step2b("di" ++ Tail, RVPos) when length(Tail) >= RVPos      -> Tail;
 step2b("na" ++ Tail, RVPos) when length(Tail) >= RVPos      -> Tail;
-step2b("ói" ++ Tail, RVPos) when length(Tail) >= RVPos      -> Tail;
+step2b("Ã³i" ++ Tail, RVPos) when length(Tail) >= RVPos      -> Tail;
 step2b("ra" ++ Tail, RVPos) when length(Tail) >= RVPos      -> Tail;
 step2b("re" ++ Tail, RVPos) when length(Tail) >= RVPos      -> Tail;
 step2b("ri" ++ Tail, RVPos) when length(Tail) >= RVPos      -> Tail;
 step2b("sa" ++ Tail, RVPos) when length(Tail) >= RVPos      -> Tail;
-step2b("sí" ++ Tail, RVPos) when length(Tail) >= RVPos      -> Tail;
+step2b("sÃ­" ++ Tail, RVPos) when length(Tail) >= RVPos      -> Tail;
 step2b(Word, _)                                             -> Word.
 
 -spec step2b(string()) -> string().
@@ -312,16 +312,16 @@ step2b(Word)         -> Word.
 step3("so" ++ Tail, RVPos) when length(Tail) >= RVPos -> Tail;
 step3([$a | Tail], RVPos) when length(Tail) >= RVPos  -> Tail;
 step3([$o | Tail], RVPos) when length(Tail) >= RVPos  -> Tail;
-step3([$á | Tail], RVPos) when length(Tail) >= RVPos  -> Tail;
-step3([$í | Tail], RVPos) when length(Tail) >= RVPos  -> Tail;
-step3([$ó | Tail], RVPos) when length(Tail) >= RVPos  -> Tail;
+step3([$Ã¡ | Tail], RVPos) when length(Tail) >= RVPos  -> Tail;
+step3([$Ã­ | Tail], RVPos) when length(Tail) >= RVPos  -> Tail;
+step3([$Ã³ | Tail], RVPos) when length(Tail) >= RVPos  -> Tail;
 
 step3("eu" ++ Tail, RVPos) when length(Tail) >= RVPos,
                                 hd(Tail) =:= $g       -> Tail;
-step3("éu" ++ Tail, RVPos) when length(Tail) >= RVPos,
+step3("Ã©u" ++ Tail, RVPos) when length(Tail) >= RVPos,
                                 hd(Tail) =:= $g       -> Tail;
 step3([$e | Tail], RVPos) when length(Tail) >= RVPos  -> Tail;
-step3([$é | Tail], RVPos) when length(Tail) >= RVPos  -> Tail;
+step3([$Ã© | Tail], RVPos) when length(Tail) >= RVPos  -> Tail;
 step3(Word, _)                                        -> Word.
 
 %% post processing
@@ -330,15 +330,15 @@ post_process(Word) ->
     post_process(Word, []).
 
 -spec post_process(string(), string()) -> string().
-post_process([$á | Tail], Acc) ->
+post_process([$Ã¡ | Tail], Acc) ->
     post_process(Tail, [$a | Acc]);
-post_process([$é | Tail], Acc) ->
+post_process([$Ã© | Tail], Acc) ->
     post_process(Tail, [$e | Acc]);
-post_process([$í | Tail], Acc) ->
+post_process([$Ã­ | Tail], Acc) ->
     post_process(Tail, [$i | Acc]);
-post_process([$ó | Tail], Acc) ->
+post_process([$Ã³ | Tail], Acc) ->
     post_process(Tail, [$o | Acc]);
-post_process([$ú | Tail], Acc) ->
+post_process([$Ãº | Tail], Acc) ->
     post_process(Tail, [$u | Acc]);
 post_process([Char | Tail], Acc) ->
     post_process(Tail, [Char | Acc]);
