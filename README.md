@@ -8,7 +8,7 @@ Stemerge is a collection of [stemmers](http://en.wikipedia.org/wiki/Stemming) in
 
 ## Supported languages
 
-At the moment the following languages are supported:
+At the moment, the following languages are supported:
 
 * English (Porter2 stemming algorithm)
 * Finnish
@@ -33,13 +33,13 @@ Scandinavian:
 
 ## Usage
 
-Just specify the language code of a word you'd like to stem like this:
+Just specify the language code of the word you'd like to stem, like this:
 
 ```erlang
 stemerge:stem("stemerge", "en")
 ```
 
-or call ```stem/1``` API of any available stemmer separately:
+or call the ```stem/1``` API of any available stemmer separately:
 
 ```erlang
 stemerge_no:stem("havneeier")
