@@ -9,7 +9,7 @@ jobs:
 
     strategy:
       matrix:
-        erlang: [26, 27, 28]
+        erlang: [24, 25, 26, 27, 28]
 
     container:
       image: erlang:${{ matrix.erlang }}
