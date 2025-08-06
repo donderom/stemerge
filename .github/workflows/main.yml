@@ -4,13 +4,12 @@ on: [pull_request, push]
 
 jobs:
   test:
-    name: Test Erlang ${{ matrix.erlang }}/${{ matrix.os }}
-    runs-on: ${{ matrix.os }}
+    name: Test on Erlang ${{ matrix.erlang }}
+    runs-on: ubuntu-latest
 
     strategy:
       matrix:
         erlang: [26, 27, 28]
-        os: [ubuntu-latest, windows-latest]
 
     container:
       image: erlang:${{ matrix.erlang }}
