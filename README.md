@@ -16,20 +16,20 @@ At the moment the following languages are supported:
 Romance:
 
 * French
-* Spanish
-* Portuguese
 * Italian
+* Portuguese
+* Spanish
 
 Germanic:
 
-* German
 * Dutch
+* German
 
 Scandinavian:
 
-* Swedish
-* Norwegian
 * Danish
+* Norwegian
+* Swedish
 
 ## Usage
 
