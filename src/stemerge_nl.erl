@@ -19,21 +19,21 @@
 %%-----------------------------------------------------------------------------
 -define(is_a_vowel(Char),
         ((Char =:= $a)
-         or (Char =:= $e)
-         or (Char =:= $i)
-         or (Char =:= $o)
-         or (Char =:= $u)
-         or (Char =:= $y)
-         or (Char =:= $è))).
+         orelse (Char =:= $e)
+         orelse (Char =:= $i)
+         orelse (Char =:= $o)
+         orelse (Char =:= $u)
+         orelse (Char =:= $y)
+         orelse (Char =:= $è))).
 
 -define(is_a_valid_s_ending(Char),
         ((Char =/= $j)
-         and (not ?is_a_vowel(Char)))).
+         andalso (not ?is_a_vowel(Char)))).
 
 -define(is_a_double(Char),
         ((Char =:= $k)
-         or (Char =:= $d)
-         or (Char =:= $t))).
+         orelse (Char =:= $d)
+         orelse (Char =:= $t))).
 
 %%-----------------------------------------------------------------------------
 %% Types
@@ -149,9 +149,9 @@ step3b(Word, _, _, _) ->
 step4([D, V, V, C | Tail]) when D =/= $I,
                                 not ?is_a_vowel(D),
                                 ((V =:= $a)
-                                 or (V =:= $e)
-                                 or (V =:= $o)
-                                 or (V =:= $u)),
+                                 orelse (V =:= $e)
+                                 orelse (V =:= $o)
+                                 orelse (V =:= $u)),
                                 not ?is_a_vowel(C) ->
     [D, V, C | Tail];
 step4(Word) ->

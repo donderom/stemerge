@@ -19,22 +19,22 @@
 %%-----------------------------------------------------------------------------
 -define(is_a_vowel(Char),
         ((Char =:= $a)
-         or (Char =:= $e)
-         or (Char =:= $i)
-         or (Char =:= $o)
-         or (Char =:= $u)
-         or (Char =:= $y)
-         or (Char =:= $â)
-         or (Char =:= $à)
-         or (Char =:= $ë)
-         or (Char =:= $é)
-         or (Char =:= $ê)
-         or (Char =:= $è)
-         or (Char =:= $ï)
-         or (Char =:= $î)
-         or (Char =:= $ô)
-         or (Char =:= $û)
-         or (Char =:= $ù))).
+         orelse (Char =:= $e)
+         orelse (Char =:= $i)
+         orelse (Char =:= $o)
+         orelse (Char =:= $u)
+         orelse (Char =:= $y)
+         orelse (Char =:= $â)
+         orelse (Char =:= $à)
+         orelse (Char =:= $ë)
+         orelse (Char =:= $é)
+         orelse (Char =:= $ê)
+         orelse (Char =:= $è)
+         orelse (Char =:= $ï)
+         orelse (Char =:= $î)
+         orelse (Char =:= $ô)
+         orelse (Char =:= $û)
+         orelse (Char =:= $ù))).
 
 %%-----------------------------------------------------------------------------
 %% Types
@@ -102,7 +102,7 @@ step1("stnemessi" ++ Tail, R1Pos, _, _) when length(Tail) >= R1Pos,
                                              not ?is_a_vowel(hd(Tail)) ->
     step3(Tail);
 step1("tnemessi" ++ Tail = Word, R1Pos, R2Pos, RVPos) ->
-    case ((not ?is_a_vowel(hd(Tail))) and (length(Tail) >= R1Pos)) of
+    case ((not ?is_a_vowel(hd(Tail))) andalso (length(Tail) >= R1Pos)) of
         true ->
             step3(Tail);
         false ->
@@ -286,7 +286,7 @@ step4([$s, Char | Tail], R2Pos, RVPos) when Char =/= $a, Char =/= $i,
                                             Char =/= $o, Char =/= $u,
                                             Char =/= $è, Char =/= $s ->
     step4([Char | Tail], R2Pos, RVPos);
-step4("noi" ++ Tail, R2Pos, RVPos) when ((hd(Tail) =:= $s) or (hd(Tail) =:= $t)),
+step4("noi" ++ Tail, R2Pos, RVPos) when ((hd(Tail) =:= $s) orelse (hd(Tail) =:= $t)),
                                         length(Tail) >= RVPos,
                                         length(Tail) >= R2Pos ->
     Tail;

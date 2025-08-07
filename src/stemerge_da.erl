@@ -19,36 +19,36 @@
 %%-----------------------------------------------------------------------------
 -define(is_a_vowel(Char),
         ((Char =:= $a)
-         or (Char =:= $e)
-         or (Char =:= $i)
-         or (Char =:= $o)
-         or (Char =:= $u)
-         or (Char =:= $y)
-         or (Char =:= $æ)
-         or (Char =:= $å)
-         or (Char =:= $ø))).
+         orelse (Char =:= $e)
+         orelse (Char =:= $i)
+         orelse (Char =:= $o)
+         orelse (Char =:= $u)
+         orelse (Char =:= $y)
+         orelse (Char =:= $æ)
+         orelse (Char =:= $å)
+         orelse (Char =:= $ø))).
 
 -define(is_a_valid_s_ending(Char),
         ((Char =:= $a)
-         or (Char =:= $b)
-         or (Char =:= $c)
-         or (Char =:= $d)
-         or (Char =:= $f)
-         or (Char =:= $g)
-         or (Char =:= $h)
-         or (Char =:= $j)
-         or (Char =:= $k)
-         or (Char =:= $l)
-         or (Char =:= $m)
-         or (Char =:= $n)
-         or (Char =:= $o)
-         or (Char =:= $p)
-         or (Char =:= $r)
-         or (Char =:= $t)
-         or (Char =:= $v)
-         or (Char =:= $y)
-         or (Char =:= $z)
-         or (Char =:= $å))).
+         orelse (Char =:= $b)
+         orelse (Char =:= $c)
+         orelse (Char =:= $d)
+         orelse (Char =:= $f)
+         orelse (Char =:= $g)
+         orelse (Char =:= $h)
+         orelse (Char =:= $j)
+         orelse (Char =:= $k)
+         orelse (Char =:= $l)
+         orelse (Char =:= $m)
+         orelse (Char =:= $n)
+         orelse (Char =:= $o)
+         orelse (Char =:= $p)
+         orelse (Char =:= $r)
+         orelse (Char =:= $t)
+         orelse (Char =:= $v)
+         orelse (Char =:= $y)
+         orelse (Char =:= $z)
+         orelse (Char =:= $å))).
 
 %%-----------------------------------------------------------------------------
 %% Types

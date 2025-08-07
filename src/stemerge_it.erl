@@ -19,15 +19,15 @@
 %%-----------------------------------------------------------------------------
 -define(is_a_vowel(Char),
         ((Char =:= $a)
-         or (Char =:= $e)
-         or (Char =:= $i)
-         or (Char =:= $o)
-         or (Char =:= $u)
-         or (Char =:= $à)
-         or (Char =:= $è)
-         or (Char =:= $ì)
-         or (Char =:= $ò)
-         or (Char =:= $ù))).
+         orelse (Char =:= $e)
+         orelse (Char =:= $i)
+         orelse (Char =:= $o)
+         orelse (Char =:= $u)
+         orelse (Char =:= $à)
+         orelse (Char =:= $è)
+         orelse (Char =:= $ì)
+         orelse (Char =:= $ò)
+         orelse (Char =:= $ù))).
 
 %%-----------------------------------------------------------------------------
 %% Types

@@ -19,45 +19,45 @@
 %%-----------------------------------------------------------------------------
 -define(is_a_vowel(Char),
         ((Char =:= $a)
-         or (Char =:= $e)
-         or (Char =:= $i)
-         or (Char =:= $o)
-         or (Char =:= $u)
-         or (Char =:= $y))).
+         orelse (Char =:= $e)
+         orelse (Char =:= $i)
+         orelse (Char =:= $o)
+         orelse (Char =:= $u)
+         orelse (Char =:= $y))).
 
 -define(is_a_double(Char1, Char2),
         ((Char1 =:= Char2)
-         and ((Char1 =:= $b)
-              or (Char1 =:= $d)
-              or (Char1 =:= $f)
-              or (Char1 =:= $g)
-              or (Char1 =:= $m)
-              or (Char1 =:= $n)
-              or (Char1 =:= $p)
-              or (Char1 =:= $r)
-              or (Char1 =:= $t)))).
+         andalso ((Char1 =:= $b)
+              orelse (Char1 =:= $d)
+              orelse (Char1 =:= $f)
+              orelse (Char1 =:= $g)
+              orelse (Char1 =:= $m)
+              orelse (Char1 =:= $n)
+              orelse (Char1 =:= $p)
+              orelse (Char1 =:= $r)
+              orelse (Char1 =:= $t)))).
 
 -define(is_a_valid_li_ending(Char),
         ((Char =:= $c)
-         or (Char =:= $d)
-         or (Char =:= $e)
-         or (Char =:= $g)
-         or (Char =:= $h)
-         or (Char =:= $k)
-         or (Char =:= $m)
-         or (Char =:= $n)
-         or (Char =:= $r)
-         or (Char =:= $t))).
+         orelse (Char =:= $d)
+         orelse (Char =:= $e)
+         orelse (Char =:= $g)
+         orelse (Char =:= $h)
+         orelse (Char =:= $k)
+         orelse (Char =:= $m)
+         orelse (Char =:= $n)
+         orelse (Char =:= $r)
+         orelse (Char =:= $t))).
 
 -define(is_invariant_after_step1a(Word),
         ((Word =:= "gninni")
-         or (Word =:= "gnituo")
-         or (Word =:= "gninnac")
-         or (Word =:= "gnirreh")
-         or (Word =:= "gnirrae")
-         or (Word =:= "deecorp")
-         or (Word =:= "deecxe")
-         or (Word =:= "deeccus"))).
+         orelse (Word =:= "gnituo")
+         orelse (Word =:= "gninnac")
+         orelse (Word =:= "gnirreh")
+         orelse (Word =:= "gnirrae")
+         orelse (Word =:= "deecorp")
+         orelse (Word =:= "deecxe")
+         orelse (Word =:= "deeccus"))).
 
 -define(is_in_r(Word, RPos, OnSuccess, OnFail),
         case length(Word) >= RPos of
@@ -378,8 +378,8 @@ ends_in_a_short_syllable([Char1, Char2])
 ends_in_a_short_syllable([Char1, Char2, Char3 | _])
   when not ?is_a_vowel(Char1),
        ((Char1 =/= $w)
-        and (Char1 =/= $x)
-        and (Char1 =/= $Y)),
+        andalso (Char1 =/= $x)
+        andalso (Char1 =/= $Y)),
        ?is_a_vowel(Char2),
        not ?is_a_vowel(Char3) ->
     true;
@@ -388,4 +388,4 @@ ends_in_a_short_syllable(_) ->
 
 -spec is_a_short_word(string(), r1pos()) -> boolean().
 is_a_short_word(Word, R1Pos) ->
-    ((ends_in_a_short_syllable(Word)) and (length(Word) =:= R1Pos)).
+    ((ends_in_a_short_syllable(Word)) andalso (length(Word) =:= R1Pos)).

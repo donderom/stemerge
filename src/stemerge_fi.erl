@@ -19,40 +19,40 @@
 %%-----------------------------------------------------------------------------
 -define(is_a_vowel(Char),
         ((Char =:= $a)
-         or (Char =:= $e)
-         or (Char =:= $i)
-         or (Char =:= $o)
-         or (Char =:= $u)
-         or (Char =:= $y)
-         or (Char =:= $ä)
-         or (Char =:= $ö))).
+         orelse (Char =:= $e)
+         orelse (Char =:= $i)
+         orelse (Char =:= $o)
+         orelse (Char =:= $u)
+         orelse (Char =:= $y)
+         orelse (Char =:= $ä)
+         orelse (Char =:= $ö))).
 
 -define(is_a_V(Char),
         ((Char =:= $a)
-         or (Char =:= $e)
-         or (Char =:= $i)
-         or (Char =:= $o)
-         or (Char =:= $u)
-         or (Char =:= $ä)
-         or (Char =:= $ö))).
+         orelse (Char =:= $e)
+         orelse (Char =:= $i)
+         orelse (Char =:= $o)
+         orelse (Char =:= $u)
+         orelse (Char =:= $ä)
+         orelse (Char =:= $ö))).
 
 -define(is_a_Vi(Char1, Char2),
         ((?is_a_V(Char1))
-         and (Char2 =:= $i))).
+         andalso (Char2 =:= $i))).
 
 -define(is_a_long_vowel(Char1, Char2),
         ((Char1 =:= Char2)
-         and ((Char1 =:= $a)
-              or (Char1 =:= $e)
-              or (Char1 =:= $i)
-              or (Char1 =:= $o)
-              or (Char1 =:= $u)
-              or (Char1 =:= $ä)
-              or (Char1 =:= $ö)))).
+         andalso ((Char1 =:= $a)
+              orelse (Char1 =:= $e)
+              orelse (Char1 =:= $i)
+              orelse (Char1 =:= $o)
+              orelse (Char1 =:= $u)
+              orelse (Char1 =:= $ä)
+              orelse (Char1 =:= $ö)))).
 
 -define(is_a_cv(Char1, Char2),
         ((not ?is_a_vowel(Char1))
-         and (?is_a_vowel(Char2)))).
+         andalso (?is_a_vowel(Char2)))).
 
 %%-----------------------------------------------------------------------------
 %% Types
@@ -139,7 +139,7 @@ step2(Word, _)                                           -> Word.
 -spec step3(string(), r1pos()) -> {boolean(), string()}.
 step3([$n, Char, $h, Char2 | Tail] = Word, R1Pos) when length(Tail) + 1 >= R1Pos,
                                                        (Char =/= $u) ->
-    case ((Char =:= Char2) and (?is_a_V(Char))) of
+    case ((Char =:= Char2) andalso (?is_a_V(Char))) of
         true ->
             {true, [Char | Tail]};
         false ->

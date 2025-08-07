@@ -19,31 +19,31 @@
 %%-----------------------------------------------------------------------------
 -define(is_a_vowel(Char),
         ((Char =:= $a)
-         or (Char =:= $e)
-         or (Char =:= $i)
-         or (Char =:= $o)
-         or (Char =:= $u)
-         or (Char =:= $y)
-         or (Char =:= $ä)
-         or (Char =:= $ö)
-         or (Char =:= $ü))).
+         orelse (Char =:= $e)
+         orelse (Char =:= $i)
+         orelse (Char =:= $o)
+         orelse (Char =:= $u)
+         orelse (Char =:= $y)
+         orelse (Char =:= $ä)
+         orelse (Char =:= $ö)
+         orelse (Char =:= $ü))).
 
 -define(is_a_valid_s_ending(Char),
         ((Char =:= $b)
-         or (Char =:= $d)
-         or (Char =:= $f)
-         or (Char =:= $g)
-         or (Char =:= $h)
-         or (Char =:= $k)
-         or (Char =:= $l)
-         or (Char =:= $m)
-         or (Char =:= $n)
-         or (Char =:= $r)
-         or (Char =:= $t))).
+         orelse (Char =:= $d)
+         orelse (Char =:= $f)
+         orelse (Char =:= $g)
+         orelse (Char =:= $h)
+         orelse (Char =:= $k)
+         orelse (Char =:= $l)
+         orelse (Char =:= $m)
+         orelse (Char =:= $n)
+         orelse (Char =:= $r)
+         orelse (Char =:= $t))).
 
 -define(is_a_valid_st_ending(Char),
         ((Char =/= $r)
-         and ?is_a_valid_s_ending(Char))).
+         andalso ?is_a_valid_s_ending(Char))).
 
 %%-----------------------------------------------------------------------------
 %% Types
