@@ -1,5 +1,5 @@
 %%-----------------------------------------------------------------------------
-%% @author Roman Parykin <donderom@ymail.com>
+%% @author Roman Parykin <github@donderom.com>
 %% @doc
 %% The common interface to all the stemmers.
 %% @end

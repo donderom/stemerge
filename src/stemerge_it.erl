@@ -1,5 +1,5 @@
 %%-----------------------------------------------------------------------------
-%% @author Roman Parykin <donderom@ymail.com>
+%% @author Roman Parykin <github@donderom.com>
 %% @doc
 %% The implementation of the italian stemming algorithm.
 %% @reference
