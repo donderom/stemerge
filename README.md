@@ -73,3 +73,30 @@ Call the Erlang API from Elixir:
 ```elixir
 :stemerge.stem(~c"stemming", ~c"en")
 ```
+
+### Gleam
+
+Add `stemerge` as a dependency to the `gleam.toml`:
+
+```toml
+[dependencies]
+stemerge = "0.3.4"
+```
+
+Define an external function:
+
+```gleam
+import gleam/erlang/charlist.{type Charlist}
+
+@external(erlang, "stemerge", "stem")
+pub fn stem(s: Charlist, lang: Charlist) -> Charlist
+```
+
+Call the external function from Gleam:
+
+```gleam
+charlist.to_string(stem(
+  charlist.from_string("stemming"),
+  charlist.from_string("en"),
+))
+```
