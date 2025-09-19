@@ -55,3 +55,21 @@ or call the `stem/1` API of any available stemmer separately:
 ```erlang
 stemerge_no:stem("havneeier")
 ```
+
+### Elixir
+
+Add `stemerge` as a dependency to the `mix.exs`:
+
+```elixir
+defp deps do
+  [
+    {:stemerge, "0.3.4"}
+  ]
+end
+```
+
+Call the Erlang API from Elixir:
+
+```elixir
+:stemerge.stem(~c"stemming", ~c"en")
+```
