@@ -34,13 +34,23 @@ Scandinavian:
 
 ## Usage
 
-Just specify the language code of the word you'd like to stem, like this:
+### Erlang
+
+Add `stemerge` as a dependency to the `rebar.config`:
+
+```erlang
+{deps, [
+    {"stemerge", "0.3.4"}
+]}.
+```
+
+Specify the language code of the word you'd like to stem, like this:
 
 ```erlang
 stemerge:stem("stemerge", "en")
 ```
 
-or call the ```stem/1``` API of any available stemmer separately:
+or call the `stem/1` API of any available stemmer separately:
 
 ```erlang
 stemerge_no:stem("havneeier")
