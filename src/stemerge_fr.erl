@@ -1,7 +1,7 @@
 %%-----------------------------------------------------------------------------
 %% @author Roman Parykin <github@donderom.com>
 %% @doc
-%% The implementation of the french stemming algorithm.
+%% The implementation of the French stemming algorithm.
 %% @reference
 %% <a href="http://snowball.tartarus.org/algorithms/french/stemmer.html">
 %% The French stemming algorithm</a>
@@ -47,9 +47,10 @@
 %% API
 %%-----------------------------------------------------------------------------
 
-%% @doc
-%% Returns the stem of a word.
--spec stem(string()) -> string().
+%% @doc     Stem of a French word form.
+%% @param   Word a French word form
+%% @returns stem of a Word in French
+-spec stem(Word :: string()) -> string().
 stem(Word) ->
     {Word1, R1Pos, R2Pos, RVPos} = bootstrap(Word),
     ReversedWord = lists:reverse(Word1),

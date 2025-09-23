@@ -1,7 +1,7 @@
 %%-----------------------------------------------------------------------------
 %% @author Roman Parykin <github@donderom.com>
 %% @doc
-%% The implementation of the german stemming algorithm.
+%% The implementation of the German stemming algorithm.
 %% @reference
 %% <a href="http://snowball.tartarus.org/algorithms/german/stemmer.html">
 %% The German stemming algorithm</a>
@@ -55,9 +55,10 @@
 %% API
 %%-----------------------------------------------------------------------------
 
-%% @doc
-%% Returns the stem of a word.
--spec stem(string()) -> string().
+%% @doc     Stem of a German word form.
+%% @param   Word a German word form
+%% @returns stem of a Word in German
+-spec stem(Word :: string()) -> string().
 stem(Word) ->
     {Word1, R1Pos, R2Pos} = bootstrap(Word),
     ReversedWord = lists:reverse(Word1),

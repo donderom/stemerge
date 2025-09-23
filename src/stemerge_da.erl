@@ -1,7 +1,7 @@
 %%-----------------------------------------------------------------------------
 %% @author Roman Parykin <github@donderom.com>
 %% @doc
-%% The implementation of the danish stemming algorithm.
+%% The implementation of the Danish stemming algorithm.
 %% @reference
 %% <a href="http://snowball.tartarus.org/algorithms/danish/stemmer.html">
 %% The Danish stemming algorithm</a>
@@ -59,9 +59,10 @@
 %% API
 %%-----------------------------------------------------------------------------
 
-%% @doc
-%% Returns the stem of a word.
--spec stem(string()) -> string().
+%% @doc     Stem of a Danish word form.
+%% @param   Word a Danish word form
+%% @returns stem of a Word in Danish
+-spec stem(Word :: string()) -> string().
 stem(Word) when length(Word) > 2 ->
     R1Pos = r_pos(Word),
     ReversedWord = lists:reverse(Word),

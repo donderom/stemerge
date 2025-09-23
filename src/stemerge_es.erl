@@ -1,7 +1,7 @@
 %%-----------------------------------------------------------------------------
 %% @author Roman Parykin <github@donderom.com>
 %% @doc
-%% The implementation of the spanish stemming algorithm.
+%% The implementation of the Spanish stemming algorithm.
 %% @reference
 %% <a href="http://snowball.tartarus.org/algorithms/spanish/stemmer.html">
 %% The Spanish stemming algorithm</a>
@@ -41,9 +41,10 @@
 %% API
 %%-----------------------------------------------------------------------------
 
-%% @doc
-%% Returns the stem of a word.
--spec stem(string()) -> string().
+%% @doc     Stem of a Spanish word form.
+%% @param   Word a Spanish word form
+%% @returns stem of a Word in Spanish
+-spec stem(Word :: string()) -> string().
 stem(Word) ->
     {R1Pos, R2Pos, RVPos} = r_pos(Word),
     ReversedWord = lists:reverse(Word),

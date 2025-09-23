@@ -1,7 +1,7 @@
 %%-----------------------------------------------------------------------------
 %% @author Roman Parykin <github@donderom.com>
 %% @doc
-%% The implementation of the norwegian stemming algorithm.
+%% The implementation of the Norwegian stemming algorithm.
 %% @reference
 %% <a href="http://snowball.tartarus.org/algorithms/norwegian/stemmer.html">
 %% The Norwegian stemming algorithm</a>
@@ -57,9 +57,10 @@
 %% API
 %%-----------------------------------------------------------------------------
 
-%% @doc
-%% Returns the stem of a word.
--spec stem(string()) -> string().
+%% @doc     Stem of a Norwegian word form.
+%% @param   Word a Norwegian word form
+%% @returns stem of a Word in Norwegian
+-spec stem(Word :: string()) -> string().
 stem(Word) when length(Word) > 2 ->
     R1Pos = r_pos(Word),
     ReversedWord = lists:reverse(Word),

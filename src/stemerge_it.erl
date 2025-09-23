@@ -1,7 +1,7 @@
 %%-----------------------------------------------------------------------------
 %% @author Roman Parykin <github@donderom.com>
 %% @doc
-%% The implementation of the italian stemming algorithm.
+%% The implementation of the Italian stemming algorithm.
 %% @reference
 %% <a href="http://snowball.tartarus.org/algorithms/italian/stemmer.html">
 %% The Italian stemming algorithm</a>
@@ -40,9 +40,10 @@
 %% API
 %%-----------------------------------------------------------------------------
 
-%% @doc
-%% Returns the stem of a word.
--spec stem(string()) -> string().
+%% @doc     Stem of an Italian word form.
+%% @param   Word an Italian word form
+%% @returns stem of a Word in Italian
+-spec stem(Word :: string()) -> string().
 stem(Word) ->
     {Word1, R1Pos, R2Pos, RVPos} = bootstrap(Word),
     ReversedWord = lists:reverse(Word1),

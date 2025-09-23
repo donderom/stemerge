@@ -1,7 +1,7 @@
 %%-----------------------------------------------------------------------------
 %% @author Roman Parykin <github@donderom.com>
 %% @doc
-%% The implementation of the portuguese stemming algorithm.
+%% The implementation of the Portuguese stemming algorithm.
 %% @reference
 %% <a href="http://snowball.tartarus.org/algorithms/portuguese/stemmer.html">
 %% The Portuguese stemming algorithm</a>
@@ -43,9 +43,10 @@
 %% API
 %%-----------------------------------------------------------------------------
 
-%% @doc
-%% Returns the stem of a word.
--spec stem(string()) -> string().
+%% @doc     Stem of a Portuguese word form.
+%% @param   Word a Portuguese word form
+%% @returns stem of a Word in Portuguese
+-spec stem(Word :: string()) -> string().
 stem(Word) ->
     {Word1, R1Pos, R2Pos, RVPos} = bootstrap(Word),
     ReversedWord = lists:reverse(Word1),

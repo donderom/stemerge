@@ -1,7 +1,7 @@
 %%-----------------------------------------------------------------------------
 %% @author Roman Parykin <github@donderom.com>
 %% @doc
-%% The implementation of the english (Porter2) stemming algorithm.
+%% The implementation of the English (Porter2) stemming algorithm.
 %% @reference
 %% <a href="http://snowball.tartarus.org/algorithms/english/stemmer.html">
 %% The English (Porter2) stemming algorithm</a>
@@ -77,9 +77,10 @@
 %% API
 %%-----------------------------------------------------------------------------
 
-%% @doc
-%% Returns the stem of a word if the word has more than 2 letters.
--spec stem(string()) -> string().
+%% @doc     Stem of an English word form.
+%% @param   Word an English word form
+%% @returns stem of a Word in English
+-spec stem(Word :: string()) -> string().
 
 %% special changes
 stem("skis")   -> "ski";

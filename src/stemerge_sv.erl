@@ -1,7 +1,7 @@
 %%-----------------------------------------------------------------------------
 %% @author Roman Parykin <github@donderom.com>
 %% @doc
-%% The implementation of the swedish stemming algorithm.
+%% The implementation of the Swedish stemming algorithm.
 %% @reference
 %% <a href="http://snowball.tartarus.org/algorithms/swedish/stemmer.html">
 %% The Swedish stemming algorithm</a>
@@ -56,9 +56,10 @@
 %% API
 %%-----------------------------------------------------------------------------
 
-%% @doc
-%% Returns the stem of a word.
--spec stem(string()) -> string().
+%% @doc     Stem of a Swedish word form.
+%% @param   Word a Swedish word form
+%% @returns stem of a Word in Swedish
+-spec stem(Word :: string()) -> string().
 stem(Word) when length(Word) > 2 ->
     R1Pos = r_pos(Word),
     ReversedWord = lists:reverse(Word),

@@ -1,7 +1,7 @@
 %%-----------------------------------------------------------------------------
 %% @author Roman Parykin <github@donderom.com>
 %% @doc
-%% The implementation of the dutch stemming algorithm.
+%% The implementation of the Dutch stemming algorithm.
 %% @reference
 %% <a href="http://snowball.tartarus.org/algorithms/dutch/stemmer.html">
 %% The Dutch stemming algorithm</a>
@@ -45,9 +45,10 @@
 %% API
 %%-----------------------------------------------------------------------------
 
-%% @doc
-%% Returns the stem of a word.
--spec stem(string()) -> string().
+%% @doc     Stem of a Dutch word form.
+%% @param   Word a Dutch word form
+%% @returns stem of a Word in Dutch
+-spec stem(Word :: string()) -> string().
 stem(Word) ->
     {Word1, R1Pos, R2Pos} = bootstrap(Word),
     ReversedWord = lists:reverse(Word1),

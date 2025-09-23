@@ -1,7 +1,7 @@
 %%-----------------------------------------------------------------------------
 %% @author Roman Parykin <github@donderom.com>
 %% @doc
-%% The common interface to all the stemmers.
+%% The common interface for all stemmers.
 %% @end
 %%-----------------------------------------------------------------------------
 -module(stemerge).
@@ -15,9 +15,11 @@
 %% API
 %%-----------------------------------------------------------------------------
 
-%% @doc
-%% Returns the stem of a word for given language.
--spec stem(string(), string()) -> string().
+%% @doc     Stem of a word for a given language.
+%% @param   Word a word to stem
+%% @param   Lang word language
+%% @returns the stem of a Word given a Lang
+-spec stem(Word :: string(), Lang :: string()) -> string().
 stem(Word, "en") ->
     stemerge_en:stem(Word);
 stem(Word, "sv") ->

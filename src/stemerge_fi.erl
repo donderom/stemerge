@@ -1,7 +1,7 @@
 %%-----------------------------------------------------------------------------
 %% @author Roman Parykin <github@donderom.com>
 %% @doc
-%% The implementation of the finnish stemming algorithm.
+%% The implementation of the Finnish stemming algorithm.
 %% @reference
 %% <a href="http://snowball.tartarus.org/algorithms/finnish/stemmer.html">
 %% The Finnish stemming algorithm</a>
@@ -64,9 +64,10 @@
 %% API
 %%-----------------------------------------------------------------------------
 
-%% @doc
-%% Returns the stem of a word if the word has more than 1 letter.
--spec stem(string()) -> string().
+%% @doc     Stem of a Finnish word form.
+%% @param   Word a Finnish word form
+%% @returns stem of a Word in Finnish
+-spec stem(Word :: string()) -> string().
 stem(Word) when length(Word) > 1 ->
     {R1Pos, R2Pos} = r_pos(Word),
     ReversedWord = lists:reverse(Word),
