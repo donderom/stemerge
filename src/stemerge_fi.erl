@@ -3,7 +3,7 @@
 %% @doc
 %% The implementation of the Finnish stemming algorithm.
 %% @reference
-%% <a href="http://snowball.tartarus.org/algorithms/finnish/stemmer.html">
+%% <a href="https://snowballstem.org/algorithms/finnish/stemmer.html">
 %% The Finnish stemming algorithm</a>
 %% @end
 %%-----------------------------------------------------------------------------
@@ -50,8 +50,30 @@
               orelse (Char1 =:= $ä)
               orelse (Char1 =:= $ö)))).
 
+-define(is_a_consonant(Char),
+        ((Char =:= $b)
+         orelse (Char =:= $c)
+         orelse (Char =:= $d)
+         orelse (Char =:= $f)
+         orelse (Char =:= $g)
+         orelse (Char =:= $h)
+         orelse (Char =:= $j)
+         orelse (Char =:= $k)
+         orelse (Char =:= $l)
+         orelse (Char =:= $m)
+         orelse (Char =:= $n)
+         orelse (Char =:= $p)
+         orelse (Char =:= $q)
+         orelse (Char =:= $r)
+         orelse (Char =:= $s)
+         orelse (Char =:= $t)
+         orelse (Char =:= $v)
+         orelse (Char =:= $w)
+         orelse (Char =:= $x)
+         orelse (Char =:= $z))).
+
 -define(is_a_cv(Char1, Char2),
-        ((not ?is_a_vowel(Char1))
+        ((?is_a_consonant(Char1))
          andalso (?is_a_vowel(Char2)))).
 
 %%-----------------------------------------------------------------------------
@@ -250,16 +272,16 @@ step6a(Word, _) ->
 %% step6b
 -spec step6b(string(), r1pos()) -> string().
 step6b([$a, Char2 | Tail] = Word, R1Pos) when length(Word) - R1Pos > 1,
-                                              not ?is_a_vowel(Char2) ->
+                                              ?is_a_consonant(Char2) ->
     [Char2 | Tail];
 step6b([$ä, Char2 | Tail] = Word, R1Pos) when length(Word) - R1Pos > 1,
-                                              not ?is_a_vowel(Char2) ->
+                                              ?is_a_consonant(Char2) ->
     [Char2 | Tail];
 step6b([$e, Char2 | Tail] = Word, R1Pos) when length(Word) - R1Pos > 1,
-                                              not ?is_a_vowel(Char2) ->
+                                              ?is_a_consonant(Char2) ->
     [Char2 | Tail];
 step6b([$i, Char2 | Tail] = Word, R1Pos) when length(Word) - R1Pos > 1,
-                                              not ?is_a_vowel(Char2) ->
+                                              ?is_a_consonant(Char2) ->
     [Char2 | Tail];
 step6b(Word, _) ->
     Word.
@@ -282,19 +304,19 @@ step6d(Word, _) ->
 
 %% step6e
 -spec step6e(string()) -> string().
-step6e([Char, Char | Tail]) when not ?is_a_vowel(Char) ->
+step6e([Char, Char | Tail]) when ?is_a_consonant(Char) ->
     [Char | Tail];
 step6e([Char1, Char2, Char2 | Tail]) when ?is_a_vowel(Char1),
-                                          not ?is_a_vowel(Char2) ->
+                                          ?is_a_consonant(Char2) ->
     [Char1, Char2 | Tail];
 step6e([Char1, Char2, Char3, Char3 | Tail]) when ?is_a_vowel(Char1),
                                                  ?is_a_vowel(Char2),
-                                                 not ?is_a_vowel(Char3) ->
+                                                 ?is_a_consonant(Char3) ->
     [Char1, Char2, Char3 | Tail];
 step6e([Char1, Char2, Char3, Char4, Char4 | Tail]) when ?is_a_vowel(Char1),
                                                         ?is_a_vowel(Char2),
                                                         ?is_a_vowel(Char3),
-                                                        not ?is_a_vowel(Char4) ->
+                                                        ?is_a_consonant(Char4) ->
     [Char1, Char2, Char3, Char4 | Tail];
 step6e(Word) ->
     Word.
@@ -310,7 +332,7 @@ r_pos(Word) ->
 
 -spec r_pos(string(), non_neg_integer()) -> {string(), non_neg_integer()}.
 r_pos([Char1, Char2 | Tail], StartPos) when ?is_a_vowel(Char1),
-                                            not ?is_a_vowel(Char2) ->
+                                            ?is_a_consonant(Char2) ->
     {Tail, StartPos + 2};
 r_pos([_ | Tail], StartPos) ->
     r_pos(Tail, StartPos + 1);
