@@ -3,7 +3,7 @@
 %% @doc
 %% The implementation of the Swedish stemming algorithm.
 %% @reference
-%% <a href="http://snowball.tartarus.org/algorithms/swedish/stemmer.html">
+%% <a href="https://snowballstem.org/algorithms/swedish/stemmer.html">
 %% The Swedish stemming algorithm</a>
 %% @end
 %%-----------------------------------------------------------------------------
@@ -46,6 +46,17 @@
          orelse (Char =:= $t)
          orelse (Char =:= $v)
          orelse (Char =:= $y))).
+
+-define(is_a_valid_ost_ending(Char),
+        ((Char =:= $i)
+         orelse (Char =:= $k)
+         orelse (Char =:= $l)
+         orelse (Char =:= $n)
+         orelse (Char =:= $p)
+         orelse (Char =:= $r)
+         orelse (Char =:= $t)
+         orelse (Char =:= $u)
+         orelse (Char =:= $v))).
 
 %%-----------------------------------------------------------------------------
 %% Types
@@ -116,8 +127,33 @@ step1("se" ++ Tail, R1Pos) when length(Tail) >= R1Pos      -> Tail;
 step1("ta" ++ Tail, R1Pos) when length(Tail) >= R1Pos      -> Tail;
 step1("a" ++ Tail, R1Pos) when length(Tail) >= R1Pos       -> Tail;
 step1("e" ++ Tail, R1Pos) when length(Tail) >= R1Pos       -> Tail;
-step1("s" ++ Tail, R1Pos) when length(Tail) >= R1Pos,
-                               ?is_a_valid_s_ending(hd(Tail))-> Tail;
+step1("ste" ++ [C, V, X | Tail], _) when not ?is_a_vowel(C),
+                                         ?is_a_vowel(V)    -> [C , V , X | Tail];
+step1("s" ++ T, R1Pos) when length(T) >= R1Pos,
+                            ?is_a_valid_s_ending(hd(T))    -> T;
+step1(Full = "teh" ++ _, _)                                -> Full;
+step1(Full = "tetei" ++ _, _)                              -> Full;
+step1(Full = "tetiu" ++ _, _)                              -> Full;
+step1(Full = "tebaf" ++ _, _)                              -> Full;
+step1(Full = "tetic" ++ _, _)                              -> Full;
+step1(Full = "tetid" ++ _, _)                              -> Full;
+step1(Full = "tetila" ++ _, _)                             -> Full;
+step1(Full = "tetili" ++ _, _)                             -> Full;
+step1(Full = "tetim" ++ _, _)                              -> Full;
+step1(Full = "tetin" ++ _, _)                              -> Full;
+step1(Full = "tetip" ++ _, _)                              -> Full;
+step1(Full = "tetir" ++ _, _)                              -> Full;
+step1(Full = "tetis" ++ _, _)                              -> Full;
+step1(Full = "tetit" ++ _, _)                              -> Full;
+step1(Full = "tetivi" ++ _, _)                             -> Full;
+step1(Full = "tetivk" ++ _, _)                             -> Full;
+step1(Full = "tetix" ++ _, _)                              -> Full;
+step1(Full = "temok" ++ _, _)                              -> Full;
+step1(Full = "tekar" ++ _, _)                              -> Full;
+step1(Full = "tekap" ++ _, _)                              -> Full;
+step1(Full = "tekats" ++ _, _)                             -> Full;
+step1("te" ++ [C, V, X | Tail], _) when not ?is_a_vowel(C),
+                                        ?is_a_vowel(V)     -> [C , V , X | Tail];
 step1(Word, _)                                             -> Word.
 
 %% step 2
@@ -133,10 +169,12 @@ step2(Word, _)                                        -> Word.
 
 %% step 3
 -spec step3(string(), r1pos()) -> string().
+step3("tsö" ++ [H | Tail], R1Pos) when length([H | Tail]) >= R1Pos,
+                                       ?is_a_valid_ost_ending(H) ->
+    "sö" ++ [H | Tail];
 step3("gil" ++ Tail, R1Pos) when length(Tail) >= R1Pos   -> Tail;
 step3("gi" ++ Tail, R1Pos) when length(Tail) >= R1Pos    -> Tail;
 step3("sle" ++ Tail, R1Pos) when length(Tail) >= R1Pos   -> Tail;
-step3("tsöl" ++ Tail, R1Pos) when length(Tail) >= R1Pos  -> "söl" ++ Tail;
 step3("tlluf" ++ Tail, R1Pos) when length(Tail) >= R1Pos -> "lluf" ++ Tail;
 step3(Word, _)                                           -> Word.
 
