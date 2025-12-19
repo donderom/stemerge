@@ -3,7 +3,7 @@
 %% @doc
 %% The implementation of the Norwegian stemming algorithm.
 %% @reference
-%% <a href="http://snowball.tartarus.org/algorithms/norwegian/stemmer.html">
+%% <a href="https://snowballstem.org/algorithms/norwegian/stemmer.html">
 %% The Norwegian stemming algorithm</a>
 %% @end
 %%-----------------------------------------------------------------------------
@@ -20,8 +20,12 @@
 -define(is_a_vowel(Char),
         ((Char =:= $a)
          orelse (Char =:= $e)
+         orelse (Char =:= $ê)
          orelse (Char =:= $i)
          orelse (Char =:= $o)
+         orelse (Char =:= $ò)
+         orelse (Char =:= $ó)
+         orelse (Char =:= $ô)
          orelse (Char =:= $u)
          orelse (Char =:= $y)
          orelse (Char =:= $æ)
@@ -41,11 +45,11 @@
          orelse (Char =:= $n)
          orelse (Char =:= $o)
          orelse (Char =:= $p)
-         orelse (Char =:= $r)
          orelse (Char =:= $t)
          orelse (Char =:= $v)
          orelse (Char =:= $y)
          orelse (Char =:= $z)
+         orelse ((Char =:= $r) andalso (not (PrecededChar =:= $e)))
          orelse ((Char =:= $k) andalso (not ?is_a_vowel(PrecededChar))))).
 
 %%-----------------------------------------------------------------------------
@@ -81,6 +85,20 @@ stem(ReversedWord, R1Pos) ->
 
 %% step 1
 -spec step1(string(), r1pos()) -> string().
+step1("srepaks" ++ Tail, R1Pos) when length(Tail) >= R1Pos -> "paks" ++ Tail;
+step1("srevah" ++ Tail, R1Pos) when length(Tail) >= R1Pos  -> "vah" ++ Tail;
+step1("srevig" ++ Tail, R1Pos) when length(Tail) >= R1Pos  -> "vig" ++ Tail;
+step1(Full = "sremma" ++ _, _)                             -> Full;
+step1(Full = "sretsa" ++ _, _)                             -> Full;
+step1(Full = "sredni" ++ _, _)                             -> Full;
+step1(Full = "srepak" ++ _, _)                             -> Full;
+step1(Full = "srekk" ++ _, _)                              -> Full;
+step1(Full = "sretl" ++ _, _)                              -> Full;
+step1(Full = "srekn" ++ _, _)                              -> Full;
+step1(Full = "sremmo" ++ _, _)                             -> Full;
+step1(Full = "srepp" ++ _, _)                              -> Full;
+step1(Full = "srev" ++ _, _)                               -> Full;
+step1(Full = "sretsø" ++ _, _)                             -> Full;
 step1("seneteh" ++ Tail, R1Pos) when length(Tail) >= R1Pos -> Tail;
 step1("eneteh" ++ Tail, R1Pos) when length(Tail) >= R1Pos  -> Tail;
 step1("sneteh" ++ Tail, R1Pos) when length(Tail) >= R1Pos  -> Tail;
