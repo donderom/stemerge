@@ -3,7 +3,7 @@
 %% @doc
 %% The implementation of the Danish stemming algorithm.
 %% @reference
-%% <a href="http://snowball.tartarus.org/algorithms/danish/stemmer.html">
+%% <a href="https://snowballstem.org/algorithms/danish/stemmer.html">
 %% The Danish stemming algorithm</a>
 %% @end
 %%-----------------------------------------------------------------------------
@@ -27,6 +27,28 @@
          orelse (Char =:= $æ)
          orelse (Char =:= $å)
          orelse (Char =:= $ø))).
+
+-define(is_a_consonant(Char),
+        ((Char =:= $b)
+         orelse (Char =:= $c)
+         orelse (Char =:= $d)
+         orelse (Char =:= $f)
+         orelse (Char =:= $g)
+         orelse (Char =:= $h)
+         orelse (Char =:= $j)
+         orelse (Char =:= $k)
+         orelse (Char =:= $l)
+         orelse (Char =:= $m)
+         orelse (Char =:= $n)
+         orelse (Char =:= $p)
+         orelse (Char =:= $q)
+         orelse (Char =:= $r)
+         orelse (Char =:= $s)
+         orelse (Char =:= $t)
+         orelse (Char =:= $v)
+         orelse (Char =:= $w)
+         orelse (Char =:= $x)
+         orelse (Char =:= $z))).
 
 -define(is_a_valid_s_ending(Char),
         ((Char =:= $a)
@@ -144,7 +166,7 @@ step3(Word, _)                                          -> Word.
 %% step 4
 -spec step4(string(), r1pos()) -> string().
 step4([Char, Char | Tail], R1Pos) when length(Tail) + 1 >= R1Pos,
-                                       not ?is_a_vowel(Char)  ->
+                                       ?is_a_consonant(Char)  ->
     [Char | Tail];
 step4(Word, _) ->
     Word.
