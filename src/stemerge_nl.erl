@@ -3,7 +3,7 @@
 %% @doc
 %% The implementation of the Dutch stemming algorithm.
 %% @reference
-%% <a href="http://snowball.tartarus.org/algorithms/dutch/stemmer.html">
+%% <a href="https://snowballstem.org/algorithms/dutch/stemmer.html>
 %% The Dutch stemming algorithm</a>
 %% @end
 %%-----------------------------------------------------------------------------
