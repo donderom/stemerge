@@ -3,7 +3,7 @@
 %% @doc
 %% The implementation of the German stemming algorithm.
 %% @reference
-%% <a href="http://snowball.tartarus.org/algorithms/german/stemmer.html">
+%% <a href="https://snowballstem.org/algorithms/german/stemmer.html">
 %% The German stemming algorithm</a>
 %% @end
 %%-----------------------------------------------------------------------------
@@ -45,6 +45,21 @@
         ((Char =/= $r)
          andalso ?is_a_valid_s_ending(Char))).
 
+-define(is_a_valid_et_ending(Char),
+        ((Char =:= $d)
+         orelse (Char =:= $f)
+         orelse (Char =:= $g)
+         orelse (Char =:= $k)
+         orelse (Char =:= $l)
+         orelse (Char =:= $m)
+         orelse (Char =:= $n)
+         orelse (Char =:= $r)
+         orelse (Char =:= $s)
+         orelse (Char =:= $t)
+         orelse (Char =:= $U)
+         orelse (Char =:= $z)
+         orelse (Char =:= $ä))).
+
 %%-----------------------------------------------------------------------------
 %% Types
 %%-----------------------------------------------------------------------------
@@ -77,12 +92,17 @@ stem(ReversedWord, R1Pos, R2Pos) ->
 
 %% step 1
 -spec step1(string(), r1pos()) -> string().
+step1(Word = "metsys" ++ Tail, R1Pos) when length(Tail) + 4 >= R1Pos -> Word;
 step1("me" ++ Tail, R1Pos) when length(Tail) >= R1Pos           -> Tail;
 step1("nre" ++ Tail, R1Pos) when length(Tail) >= R1Pos          -> Tail;
 step1("re" ++ Tail, R1Pos) when length(Tail) >= R1Pos           -> Tail;
+step1("nire" ++ Tail, R1Pos) when length(Tail) >= R1Pos         -> Tail;
+step1("nennire" ++ Tail, R1Pos) when length(Tail) >= R1Pos      -> Tail;
 step1("e" ++ Tail, R1Pos) when length(Tail) >= R1Pos            -> after_step1(Tail);
 step1("ne" ++ Tail, R1Pos) when length(Tail) >= R1Pos           -> after_step1(Tail);
 step1("se" ++ Tail, R1Pos) when length(Tail) >= R1Pos           -> after_step1(Tail);
+step1("snl" ++ Tail, R1Pos) when length(Tail) >= R1Pos          -> [$l | Tail];
+step1("nl" ++ Tail, R1Pos) when length(Tail) >= R1Pos           -> [$l | Tail];
 step1([$s, Char | Tail], R1Pos) when length(Tail) + 1 >= R1Pos,
                                      ?is_a_valid_s_ending(Char) -> [Char | Tail];
 step1(Word, _)                                                  -> Word.
@@ -93,12 +113,19 @@ after_step1(Word)           -> Word.
 
 %% step 2
 -spec step2(string(), r1pos()) -> string().
+step2(Word = "tendroeg" ++ _, _)                                -> Word;
+step2(Word = "tenretni" ++ _, _)                                -> Word;
+step2(Word = "tenalp" ++ _, _)                                  -> Word;
+step2(Word = "tekcit" ++ _, _)                                  -> Word;
+step2(Word = "tert" ++ _, _)                                    -> Word;
 step2("ne" ++ Tail, R1Pos) when length(Tail) >= R1Pos           -> Tail;
 step2("re" ++ Tail, R1Pos) when length(Tail) >= R1Pos           -> Tail;
 step2("tse" ++ Tail, R1Pos) when length(Tail) >= R1Pos          -> Tail;
 step2("ts" ++ Tail, R1Pos) when length(Tail) >= R1Pos,
                                 length(Tail) > 3,
                                 ?is_a_valid_st_ending(hd(Tail)) -> Tail;
+step2("te" ++ [H | Tail], R1Pos) when length(Tail) + 1 >= R1Pos,
+                                      ?is_a_valid_et_ending(H)  -> [H | Tail];
 step2(Word, _)                                                  -> Word.
 
 %% step 3
@@ -172,16 +199,24 @@ r_pos([], StartPos) ->
 
 -spec bootstrap(string()) -> {string(), r1pos(), r2pos()}.
 bootstrap(Word) ->
-    Word1 = mark_vowels(replace_ss(Word)),
+    Word1 = mappings(mark_vowels(Word)),
     {R1Pos, R2Pos} = r_pos(Word1),
     {Word1, R1Pos, R2Pos}.
 
--spec replace_ss(string()) -> string().
-replace_ss("\x{00DF}" ++ Tail) ->
-    [$s, $s | replace_ss(Tail)];
-replace_ss([Char | Tail]) ->
-    [Char | replace_ss(Tail)];
-replace_ss([]) ->
+-spec mappings(string()) -> string().
+mappings("\x{00DF}" ++ Tail) ->
+    [$s, $s | mappings(Tail)];
+mappings("ae" ++ Tail) ->
+    [$ä | mappings(Tail)];
+mappings("oe" ++ Tail) ->
+    [$ö | mappings(Tail)];
+mappings("ue" ++ Tail) ->
+    [$ü | mappings(Tail)];
+mappings("que" ++ Tail) ->
+    [$q, $u, $e | mappings(Tail)];
+mappings([Char | Tail]) ->
+    [Char | mappings(Tail)];
+mappings([]) ->
     [].
 
 -spec mark_vowels(string()) -> string().
