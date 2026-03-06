@@ -3,7 +3,7 @@
 %% @doc
 %% The implementation of the Spanish stemming algorithm.
 %% @reference
-%% <a href="http://snowball.tartarus.org/algorithms/spanish/stemmer.html">
+%% <a href="https://snowballstem.org/algorithms/spanish/stemmer.html">
 %% The Spanish stemming algorithm</a>
 %% @end
 %%-----------------------------------------------------------------------------
@@ -126,6 +126,7 @@ step1("aroda" ++ Tail, _, R2Pos, _) when length(Tail) >= R2Pos   -> step1a(Tail,
 step1("nóica" ++ Tail, _, R2Pos, _) when length(Tail) >= R2Pos   -> step1a(Tail, R2Pos);
 step1("setna" ++ Tail, _, R2Pos, _) when length(Tail) >= R2Pos   -> step1a(Tail, R2Pos);
 step1("aicna" ++ Tail, _, R2Pos, _) when length(Tail) >= R2Pos   -> step1a(Tail, R2Pos);
+step1("noica" ++ Tail, _, R2Pos, _) when length(Tail) >= R2Pos   -> step1a(Tail, R2Pos);
 step1("roda" ++ Tail, _, R2Pos, _) when length(Tail) >= R2Pos    -> step1a(Tail, R2Pos);
 step1("etna" ++ Tail, _, R2Pos, _) when length(Tail) >= R2Pos    -> step1a(Tail, R2Pos);
 
@@ -134,6 +135,7 @@ step1("aígol" ++ Tail, _, R2Pos, _) when length(Tail) >= R2Pos  -> "gol" ++ Tai
 
 step1("nóicu" ++ Tail, _, R2Pos, _) when length(Tail) >= R2Pos   -> [$u | Tail];
 step1("senoicu" ++ Tail, _, R2Pos, _) when length(Tail) >= R2Pos -> [$u | Tail];
+step1("noicu" ++ Tail, _, R2Pos, _) when length(Tail) >= R2Pos   -> [$u | Tail];
 
 step1("saicne" ++ Tail, _, R2Pos, _) when length(Tail) >= R2Pos -> "etne" ++ Tail;
 step1("aicne" ++ Tail, _, R2Pos, _) when length(Tail) >= R2Pos  -> "etne" ++ Tail;
