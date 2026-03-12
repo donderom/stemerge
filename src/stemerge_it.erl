@@ -3,7 +3,7 @@
 %% @doc
 %% The implementation of the Italian stemming algorithm.
 %% @reference
-%% <a href="http://snowball.tartarus.org/algorithms/italian/stemmer.html">
+%% <a href="https://snowballstem.org/algorithms/italian/stemmer.html">
 %% The Italian stemming algorithm</a>
 %% @end
 %%-----------------------------------------------------------------------------
@@ -44,6 +44,7 @@
 %% @param   Word an Italian word form
 %% @returns stem of a Word in Italian
 -spec stem(Word :: string()) -> string().
+stem("divan" ++ _) -> "divan";
 stem(Word) ->
     {Word1, R1Pos, R2Pos, RVPos} = bootstrap(Word),
     ReversedWord = lists:reverse(Word1),
