@@ -3,7 +3,7 @@
 %% @doc
 %% The implementation of the Portuguese stemming algorithm.
 %% @reference
-%% <a href="http://snowball.tartarus.org/algorithms/portuguese/stemmer.html">
+%% <a href="https://snowballstem.org/algorithms/portuguese/stemmer.html">
 %% The Portuguese stemming algorithm</a>
 %% @end
 %%-----------------------------------------------------------------------------
@@ -93,11 +93,11 @@ step1("aci" ++ Tail, _, R2Pos, RVPos) when length(Tail) >= R2Pos     -> step3(Ta
 step1("oso" ++ Tail, _, R2Pos, RVPos) when length(Tail) >= R2Pos     -> step3(Tail, RVPos);
 step1("aso" ++ Tail, _, R2Pos, RVPos) when length(Tail) >= R2Pos     -> step3(Tail, RVPos);
 
-step1("aígol" ++ Tail, _, R2Pos, RVPos) when length(Tail) >= R2Pos  -> step3("gol" ++ Tail, RVPos);
-step1("saígol" ++ Tail, _, R2Pos, RVPos) when length(Tail) >= R2Pos -> step3("gol" ++ Tail, RVPos);
+step1("aigol" ++ Tail, _, R2Pos, RVPos) when length(Tail) >= R2Pos  -> step3("gol" ++ Tail, RVPos);
+step1("saigol" ++ Tail, _, R2Pos, RVPos) when length(Tail) >= R2Pos -> step3("gol" ++ Tail, RVPos);
 
-step1("nóicu" ++ Tail, _, R2Pos, RVPos) when length(Tail) >= R2Pos   -> step3([$u | Tail], RVPos);
-step1("senoicu" ++ Tail, _, R2Pos, RVPos) when length(Tail) >= R2Pos -> step3([$u | Tail], RVPos);
+step1("o~açu" ++ Tail, _, R2Pos, RVPos) when length(Tail) >= R2Pos  -> step3([$u | Tail], RVPos);
+step1("se~oçu" ++ Tail, _, R2Pos, RVPos) when length(Tail) >= R2Pos -> step3([$u | Tail], RVPos);
 
 step1("aicnê" ++ Tail, _, R2Pos, RVPos) when length(Tail) >= R2Pos  -> step3("etne" ++ Tail, RVPos);
 step1("saicnê" ++ Tail, _, R2Pos, RVPos) when length(Tail) >= R2Pos -> step3("etne" ++ Tail, RVPos);

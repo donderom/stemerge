@@ -9931,7 +9931,7 @@ dev
 dev
 dev
 devoçã
-devoluçã
+devolu
 devolut
 devolv
 devolv
@@ -12968,7 +12968,7 @@ evoc
 evoc
 evoc
 evoc
-evoluçã
+evolu
 evolu
 evolu
 evolu
@@ -13071,8 +13071,8 @@ excrement
 excrescent
 excursã
 excursõ
-execuçã
-execuçõ
+execu
+execu
 execut
 execut
 execut
@@ -17468,7 +17468,7 @@ intrat
 intrig
 intrig
 intrig
-introduçã
+introdu
 introduz
 introduz
 introduz
@@ -25833,7 +25833,7 @@ reconhec
 reconqu
 reconstituiçã
 reconstro
-reconstruçã
+reconstru
 reconstru
 recontrat
 reconversã
@@ -26418,7 +26418,7 @@ reprim
 reprim
 reprim
 repris
-reproduçã
+reprodu
 reprodutor
 reprodutor
 reproduz
@@ -26515,7 +26515,7 @@ resmateriz
 resmateriz
 resmung
 resmung
-resoluçã
+resolu
 resolv
 resolv
 resolv
@@ -26836,14 +26836,14 @@ revolt
 revolt
 revolt
 revolt
-revoluçã
+revolu
 revolucion
 revolucion
 revolucionár
 revolucionár
 revolucionári
 revolucion
-revoluçõ
+revolu
 revólv
 revot
 revson
