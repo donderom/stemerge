@@ -3,7 +3,7 @@
 %% @doc
 %% The implementation of the French stemming algorithm.
 %% @reference
-%% <a href="http://snowball.tartarus.org/algorithms/french/stemmer.html">
+%% <a href="https://snowballstem.org/algorithms/french/stemmer.html">
 %% The French stemming algorithm</a>
 %% @end
 %%-----------------------------------------------------------------------------
@@ -35,6 +35,24 @@
          orelse (Char =:= $ô)
          orelse (Char =:= $û)
          orelse (Char =:= $ù))).
+
+-define(is_an_elision(Char),
+        ((Char =:= $c)
+         orelse (Char =:= $d)
+         orelse (Char =:= $j)
+         orelse (Char =:= $l)
+         orelse (Char =:= $m)
+         orelse (Char =:= $n)
+         orelse (Char =:= $s)
+         orelse (Char =:= $t))).
+
+-define(is_oux(Char),
+        ((Char =:= $b)
+         orelse (Char =:= $h)
+         orelse (Char =:= $j)
+         orelse (Char =:= $l)
+         orelse (Char =:= $n)
+         orelse (Char =:= $p))).
 
 %%-----------------------------------------------------------------------------
 %% Types
@@ -129,6 +147,7 @@ step1("fi" ++ Tail, _, R2Pos, _) when length(Tail) >= R2Pos   -> step3(step1e(Ta
 
 step1("xuae" ++ Tail, _, _, _)                               -> step3("uae" ++ Tail);
 step1("xua" ++ Tail, R1Pos, _, _) when length(Tail) >= R1Pos -> step3("la" ++ Tail);
+step1("xuo" ++ ([H | _] = Tail), _, _, _) when ?is_oux(H)    -> step3("uo" ++ Tail);
 
 step1("sesue" ++ Tail, _, R2Pos, _) when length(Tail) >= R2Pos -> step3(Tail);
 step1("esue" ++ Tail, _, R2Pos, _) when length(Tail) >= R2Pos  -> step3(Tail);
@@ -221,14 +240,24 @@ step2a([$t, $i, C | T] = W, R2, RV) when length(T) >= RV -> step2a([C | T], R2, 
 step2a([$i, C | T] = W, R2, RV) when length(T) >= RV     -> step2a([C | T], R2, RV, W);
 step2a(Word, R2Pos, RVPos)                               -> step2b(Word, R2Pos, RVPos).
 
-%% checking for preceding by a non-vowel
+%% checking for preceding by a non-H and a non-vowel
 -spec step2a(string(), r2pos(), rvpos(), string()) -> string().
-step2a([Char | Tail], _, _, _) when not ?is_a_vowel(Char) -> step3([Char | Tail]);
-step2a(_, R2Pos, RVPos, Word)                             -> step2b(Word, R2Pos, RVPos).
+step2a([Char | Tail], _, _, _) when not ?is_a_vowel(Char),
+                                    Char =/= $H            -> step3([Char | Tail]);
+step2a(_, R2Pos, RVPos, Word)                              -> step2b(Word, R2Pos, RVPos).
 
 %% step 2b
 %%   where T = Tail
 -spec step2b(string(), r2pos(), rvpos()) -> string().
+step2b(W = "sesiala" ++ _, R2Pos, RVPos)                  -> step4(W, R2Pos, RVPos);
+step2b(W = "sesiavua" ++ _, R2Pos, RVPos)                 -> step4(W, R2Pos, RVPos);
+step2b(W = "sesialpé" ++ _, R2Pos, RVPos)                 -> step4(W, R2Pos, RVPos);
+step2b(W = "esiala" ++ _, R2Pos, RVPos)                   -> step4(W, R2Pos, RVPos);
+step2b(W = "esiavua" ++ _, R2Pos, RVPos)                  -> step4(W, R2Pos, RVPos);
+step2b(W = "esialpé" ++ _, R2Pos, RVPos)                  -> step4(W, R2Pos, RVPos);
+step2b(W = "siala" ++ _, R2Pos, RVPos)                    -> step4(W, R2Pos, RVPos);
+step2b(W = "siavua" ++ _, R2Pos, RVPos)                   -> step4(W, R2Pos, RVPos);
+step2b(W = "sialpé" ++ _, R2Pos, RVPos)                   -> step4(W, R2Pos, RVPos);
 step2b("tneIare" ++ T, _, RVPos) when length(T) >= RVPos  -> step3(T);
 step2b("snoissa" ++ T, _, RVPos) when length(T) >= RVPos  -> step3(step2b(T, RVPos));
 step2b("snoire" ++ T, _, RVPos) when length(T) >= RVPos   -> step3(T);
@@ -243,6 +272,7 @@ step2b("tnore" ++ T, _, RVPos) when length(T) >= RVPos    -> step3(T);
 step2b("tneIa" ++ T, _, RVPos) when length(T) >= RVPos    -> step3(step2b(T, RVPos));
 step2b("setna" ++ T, _, RVPos) when length(T) >= RVPos    -> step3(step2b(T, RVPos));
 step2b("sessa" ++ T, _, RVPos) when length(T) >= RVPos    -> step3(step2b(T, RVPos));
+step2b("sesia" ++ T, _, RVPos) when length(T) >= RVPos    -> step3(T);
 step2b("iare" ++ T, _, RVPos) when length(T) >= RVPos     -> step3(T);
 step2b("sare" ++ T, _, RVPos) when length(T) >= RVPos     -> step3(T);
 step2b("zere" ++ T, _, RVPos) when length(T) >= RVPos     -> step3(T);
@@ -251,6 +281,8 @@ step2b("setâ" ++ T, _, RVPos) when length(T) >= RVPos     -> step3(step2b(T, RV
 step2b("etna" ++ T, _, RVPos) when length(T) >= RVPos     -> step3(step2b(T, RVPos));
 step2b("stna" ++ T, _, RVPos) when length(T) >= RVPos     -> step3(step2b(T, RVPos));
 step2b("essa" ++ T, _, RVPos) when length(T) >= RVPos     -> step3(step2b(T, RVPos));
+step2b("siae" ++ T, _, RVPos) when length(T) >= RVPos     -> step3(T);
+step2b("esia" ++ T, _, RVPos) when length(T) >= RVPos     -> step3(T);
 step2b("seé" ++ T, _, RVPos) when length(T) >= RVPos      -> step3(T);
 step2b("are" ++ T, _, RVPos) when length(T) >= RVPos      -> step3(T);
 step2b("zei" ++ T, _, RVPos) when length(T) >= RVPos      -> step3(T);
@@ -283,6 +315,7 @@ step3(Word)        -> Word.
 
 %% step 4
 -spec step4(string(), r2pos(), rvpos()) -> string().
+step4([$s, $i, $H | Tail], R2Pos, RVPos) -> step4([$i, $H | Tail], R2Pos, RVPos);
 step4([$s, Char | Tail], R2Pos, RVPos) when Char =/= $a, Char =/= $i,
                                             Char =/= $o, Char =/= $u,
                                             Char =/= $è, Char =/= $s ->
@@ -296,7 +329,6 @@ step4("erèI" ++ Tail, _, RVPos) when length(Tail) >= RVPos -> [$i | Tail];
 step4("rei" ++ Tail, _, RVPos) when length(Tail) >= RVPos  -> [$i | Tail];
 step4("reI" ++ Tail, _, RVPos) when length(Tail) >= RVPos  -> [$i | Tail];
 step4([$e | Tail], _, RVPos) when length(Tail) >= RVPos    -> Tail;
-step4("ëug" ++ Tail, _, RVPos) when length(Tail) >= RVPos  -> "ug" ++ Tail;
 step4(Word, _, _) -> Word.
 
 %% step 5
@@ -330,6 +362,12 @@ post_process([$U | Tail], Acc) ->
     post_process(Tail, [$u | Acc]);
 post_process([$Y | Tail], Acc) ->
     post_process(Tail, [$y | Acc]);
+post_process([$e, $H | Tail], Acc) ->
+    post_process(Tail, [$ë | Acc]);
+post_process([$i, $H | Tail], Acc) ->
+    post_process(Tail, [$ï | Acc]);
+post_process([$H | Tail], Acc) ->
+    post_process(Tail, Acc);
 post_process([Char | Tail], Acc) ->
     post_process(Tail, [Char | Acc]);
 post_process([], Acc) ->
@@ -361,6 +399,8 @@ rv_pos("col" ++ _) ->
     3;
 rv_pos("tap" ++ _) ->
     3;
+rv_pos([$n, $i, Char | _]) when ?is_a_vowel(Char) ->
+    3;
 rv_pos([Char1, Char2 | _]) when ?is_a_vowel(Char1),
                                 ?is_a_vowel(Char2) ->
     3;
@@ -380,9 +420,15 @@ rv_pos([], StartPos) ->
 
 -spec bootstrap(string()) -> {string(), r1pos(), r2pos(), rvpos()}.
 bootstrap(Word) ->
-    Word1 = mark_vowels(Word),
+    Word1 = mark_vowels(remove_elisions(Word)),
     {R1Pos, R2Pos, RVPos} = r_pos(Word1),
     {Word1, R1Pos, R2Pos, RVPos}.
+
+-spec remove_elisions(string()) -> string().
+remove_elisions([$q, $u, $' | Tail]) when length(Tail) >= 1  -> Tail;
+remove_elisions([Char, $' | Tail]) when length(Tail) >= 1,
+                                        ?is_an_elision(Char) -> Tail;
+remove_elisions(Word) -> Word.
 
 -spec mark_vowels(string()) -> string().
 mark_vowels([Char1, $u, Char2 | Tail]) when ?is_a_vowel(Char1),
@@ -397,6 +443,10 @@ mark_vowels([Char1, $y | Tail]) when ?is_a_vowel(Char1) ->
     [Char1, $Y | mark_vowels(Tail)];
 mark_vowels([$q, $u | Tail]) ->
     [$q, $U | mark_vowels(Tail)];
+mark_vowels([$ë | Tail]) ->
+    [$H, $e | mark_vowels(Tail)];
+mark_vowels([$ï | Tail]) ->
+    [$H, $i | mark_vowels(Tail)];
 mark_vowels([Char | Tail]) ->
     [Char | mark_vowels(Tail)];
 mark_vowels([]) ->
