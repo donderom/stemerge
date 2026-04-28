@@ -3,7 +3,7 @@
 %% @doc
 %% The implementation of the English (Porter2) stemming algorithm.
 %% @reference
-%% <a href="http://snowball.tartarus.org/algorithms/english/stemmer.html">
+%% <a href="https://snowballstem.org/algorithms/english/stemmer.html">
 %% The English (Porter2) stemming algorithm</a>
 %% @end
 %%-----------------------------------------------------------------------------
@@ -25,17 +25,16 @@
          orelse (Char =:= $u)
          orelse (Char =:= $y))).
 
--define(is_a_double(Char1, Char2),
-        ((Char1 =:= Char2)
-         andalso ((Char1 =:= $b)
-              orelse (Char1 =:= $d)
-              orelse (Char1 =:= $f)
-              orelse (Char1 =:= $g)
-              orelse (Char1 =:= $m)
-              orelse (Char1 =:= $n)
-              orelse (Char1 =:= $p)
-              orelse (Char1 =:= $r)
-              orelse (Char1 =:= $t)))).
+-define(is_a_double(Char),
+        ((Char =:= $b)
+         orelse (Char =:= $d)
+         orelse (Char =:= $f)
+         orelse (Char =:= $g)
+         orelse (Char =:= $m)
+         orelse (Char =:= $n)
+         orelse (Char =:= $p)
+         orelse (Char =:= $r)
+         orelse (Char =:= $t))).
 
 -define(is_a_valid_li_ending(Char),
         ((Char =:= $c)
@@ -85,9 +84,6 @@
 %% special changes
 stem("skis")   -> "ski";
 stem("skies")  -> "sky";
-stem("dying")  -> "die";
-stem("lying")  -> "lie";
-stem("tying")  -> "tie";
 %% special -ly cases
 stem("idly")   -> "idl";
 stem("gently") -> "gentl";
@@ -95,7 +91,7 @@ stem("ugly")   -> "ugli";
 stem("early")  -> "earli";
 stem("only")   -> "onli";
 stem("singly") -> "singl";
-%% invariant form
+%% invariant forms
 stem("sky")    -> "sky";
 stem("news")   -> "news";
 stem("howe")   -> "howe";
@@ -165,7 +161,7 @@ mark_vowels_rec([Char | Tail]) ->
 mark_vowels_rec([]) ->
     [].
 
-%% if the words begins gener, commun or arsen, set R1 to be the remainder of the word
+%% if a word starts with a particular prefix, set R1 to be the remainder of the word
 -spec r_pos(string()) -> {r1pos(), r2pos()}.
 r_pos("gener" ++ Tail) ->
     R1Pos = 5,
@@ -176,6 +172,30 @@ r_pos("commun" ++ Tail) ->
     {_, R2Pos} = r_pos(Tail, R1Pos),
     {R1Pos, R2Pos};
 r_pos("arsen" ++ Tail) ->
+    R1Pos = 5,
+    {_, R2Pos} = r_pos(Tail, R1Pos),
+    {R1Pos, R2Pos};
+r_pos("past" ++ Tail) ->
+    R1Pos = 4,
+    {_, R2Pos} = r_pos(Tail, R1Pos),
+    {R1Pos, R2Pos};
+r_pos("univers" ++ Tail) ->
+    R1Pos = 7,
+    {_, R2Pos} = r_pos(Tail, R1Pos),
+    {R1Pos, R2Pos};
+r_pos("later" ++ Tail) ->
+    R1Pos = 5,
+    {_, R2Pos} = r_pos(Tail, R1Pos),
+    {R1Pos, R2Pos};
+r_pos("emerg" ++ Tail) ->
+    R1Pos = 5,
+    {_, R2Pos} = r_pos(Tail, R1Pos),
+    {R1Pos, R2Pos};
+r_pos("organ" ++ Tail) ->
+    R1Pos = 5,
+    {_, R2Pos} = r_pos(Tail, R1Pos),
+    {R1Pos, R2Pos};
+r_pos("inter" ++ Tail) ->
     R1Pos = 5,
     {_, R2Pos} = r_pos(Tail, R1Pos),
     {R1Pos, R2Pos};
@@ -224,11 +244,24 @@ step1a(Word) -> Word.
 
 %% step 1b
 -spec step1b(string(), r1pos()) -> string().
+step1b("deecorp" = Word, _)           -> Word;
+step1b("yldeecorp" = Word, _)         -> Word;
+step1b("deecxe" = Word, _)            -> Word;
+step1b("yldeecxe" = Word, _)          -> Word;
+step1b("deeccus" = Word, _)           -> Word;
+step1b("yldeeccus" = Word, _)         -> Word;
+step1b("gninni" = Word, _)            -> Word;
+step1b("gnituo" = Word, _)            -> Word;
+step1b("gninnac" = Word, _)           -> Word;
+step1b("gnirreh" = Word, _)           -> Word;
+step1b("gnirrae" = Word, _)           -> Word;
+step1b("gnineve" = Word, _)           -> Word;
 step1b("yldee" ++ Tail = Word, R1Pos) -> ?is_in_r(Tail, R1Pos, "ee" ++ Tail, Word);
 step1b("dee" ++ Tail = Word, R1Pos)   -> ?is_in_r(Tail, R1Pos, "ee" ++ Tail, Word);
 step1b("ylde" ++ Tail = Word, R1Pos)  -> after_step1b(Tail, R1Pos, Word);
 step1b("de" ++ Tail = Word, R1Pos)    -> after_step1b(Tail, R1Pos, Word);
 step1b("ylgni" ++ Tail = Word, R1Pos) -> after_step1b(Tail, R1Pos, Word);
+step1b("gniy" ++ [Char | []], _) when not ?is_a_vowel(Char) -> [$e, $i, Char];
 step1b("gni" ++ Tail = Word, R1Pos)   -> after_step1b(Tail, R1Pos, Word);
 step1b(Word, _)                       -> Word.
 
@@ -242,11 +275,11 @@ after_step1b(Tail, R1Pos, Word) ->
     end.
 
 -spec after_step1b(string(), r1pos()) -> string().
-after_step1b("ta" ++ _ = Word, _)                                  -> [$e | Word];
-after_step1b("lb" ++ _ = Word, _)                                  -> [$e | Word];
-after_step1b("zi" ++ _ = Word, _)                                  -> [$e | Word];
-after_step1b([Char, Char | Tail], _) when ?is_a_double(Char, Char) -> [Char | Tail];
-after_step1b(Word, R1Pos)                                          ->
+after_step1b("ta" ++ _ = Word, _)                             -> [$e | Word];
+after_step1b("lb" ++ _ = Word, _)                             -> [$e | Word];
+after_step1b("zi" ++ _ = Word, _)                             -> [$e | Word];
+after_step1b([A | [A, _, _ | _] = T], _) when ?is_a_double(A) -> T;
+after_step1b(Word, R1Pos)                                     ->
     case is_a_short_word(Word, R1Pos) of
         true  ->
             [$e | Word];
@@ -287,6 +320,7 @@ step2("ssenevi" ++ Tail = Word, R1Pos) -> ?is_in_r(Tail, R1Pos, "evi" ++ Tail, W
 step2("itivi" ++ Tail = Word, R1Pos)   -> ?is_in_r(Tail, R1Pos, "evi" ++ Tail, Word);
 step2("itilib" ++ Tail = Word, R1Pos)  -> ?is_in_r(Tail, R1Pos, "elb" ++ Tail, Word);
 step2("ilb" ++ Tail = Word, R1Pos)     -> ?is_in_r(Tail, R1Pos, "elb" ++ Tail, Word);
+step2("tsigo" ++ Tail = Word, R1Pos)   -> ?is_in_r(Tail, R1Pos, "go" ++ Tail, Word);
 step2("igol" ++ Tail = Word, R1Pos)    -> ?is_in_r([$l | Tail], R1Pos, "gol" ++ Tail, Word);
 step2("illuf" ++ Tail = Word, R1Pos)   -> ?is_in_r(Tail, R1Pos, "luf" ++ Tail, Word);
 step2("ilssel" ++ Tail = Word, R1Pos)  -> ?is_in_r(Tail, R1Pos, "ssel" ++ Tail, Word);
@@ -372,6 +406,8 @@ contains_a_vowel([]) ->
     false.
 
 -spec ends_in_a_short_syllable(string()) -> boolean().
+ends_in_a_short_syllable("tsap") ->
+    true;
 ends_in_a_short_syllable([Char1, Char2])
   when not ?is_a_vowel(Char1),
        ?is_a_vowel(Char2) ->
